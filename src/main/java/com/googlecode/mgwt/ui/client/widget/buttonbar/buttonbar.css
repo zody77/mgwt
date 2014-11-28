@@ -26,9 +26,16 @@
   }
 }
 
-@if user.agent ie9 ie10 {
+@if user.agent ie9 {
   .mgwt-ButtonBar {
     display: table;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-ButtonBar {
+    display: -ms-flexbox;
+    -ms-flex-direction: horizontal;
   }
 }
 
@@ -46,7 +53,7 @@
   font-weight: bold;
 }
 
-@if user.agent ie9 ie10 {
+@if user.agent ie9 {
   .mgwt-ButtonBar-text {
     display: table-cell;
     vertical-align: middle;

@@ -82,6 +82,16 @@ public class OsDetectionRuntimeImpl implements OsDetection {
   }
 
   @Override
+  public boolean isWindowsPhone()
+  {
+    String userAgent = getUserAgent();
+    if (userAgent.contains("windows phone 8")) {
+      return true;
+    }
+    return false;
+  }
+
+  @Override
   public boolean isBlackBerry() {
     return false;
   }
@@ -140,4 +150,5 @@ public class OsDetectionRuntimeImpl implements OsDetection {
 
     return false;
   }
+
 }

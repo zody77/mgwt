@@ -21,6 +21,13 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-ScrollPanel-container {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
+  }
+}
+
 @if user.agent gecko1_8 {
   .mgwt-ScrollPanel-container {
     -moz-transition-property: literal('-moz-transform');
@@ -41,6 +48,14 @@
     -webkit-transition-duration: 300ms;
     -webkit-transition-delay: 0ms;
     -webkit-transition-property: opacity;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-Scrollbar {
+    transition-duration: 300ms;
+    transition-delay: 0ms;
+    transition-property: opacity;
   }
 }
 
@@ -83,6 +98,18 @@
     -webkit-transition-timing-function:cubic-bezier(0.33,0.66,0.66,1);
     -webkit-transform: translate3d('0,0, 0');
     -webkit-transition-duration:0;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-Scrollbar-Bar {
+    background-clip:padding-box;
+    box-sizing:border-box;
+    border-radius:3px;
+    transition-property:transform;
+    transition-timing-function:cubic-bezier(0.33,0.66,0.66,1);
+    transform: translate3d('0,0, 0');
+    transition-duration:0;
   }
 }
 

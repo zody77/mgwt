@@ -15,6 +15,13 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-Carousel {
+    display: -ms-flexbox;
+    -ms-flex: 1;
+  }
+}
+
 .mgwt-Carousel {
   position: relative;
   flex:1;
@@ -26,6 +33,12 @@
   .mgwt-Carousel-Scroller, .mgwt-Carousel-Container  {
     -webkit-box-flex: 1; /* iOS < 7 && Android < 4.4*/
     -webkit-flex: 1;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-Carousel-Scroller, .mgwt-Carousel-Container  {
+    -ms-flex: 1;
   }
 }
 

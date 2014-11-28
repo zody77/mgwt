@@ -15,4 +15,30 @@ under * the License.
   <replace-with class="com.googlecode.mgwt.ui.client.widget.panel.flex.FlexPanelDefaultAppearance">
     <when-type-is class="com.googlecode.mgwt.ui.client.widget.panel.flex.FlexPanelAppearance" />
   </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.widget.panel.flex.FlexPropertyHelperStandard">
+    <when-type-is class="com.googlecode.mgwt.ui.client.widget.panel.flex.FlexPropertyHelper" />
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.widget.panel.flex.FlexPropertyHelperWebkit">
+    <when-type-is class="com.googlecode.mgwt.ui.client.widget.panel.flex.FlexPropertyHelper" />
+    <all>
+      <when-property-is name="user.agent" value="safari" />
+    </all>
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.widget.panel.flex.FlexPropertyHelperIE10">
+    <when-type-is class="com.googlecode.mgwt.ui.client.widget.panel.flex.FlexPropertyHelper" />
+    <all>
+      <when-property-is name="user.agent" value="ie10" />
+    </all>
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.widget.panel.flex.FlexPropertyHelperMoz">
+    <when-type-is class="com.googlecode.mgwt.ui.client.widget.panel.flex.FlexPropertyHelper" />
+    <all>
+      <when-property-is name="user.agent" value="gecko1_8" />
+    </all>
+  </replace-with>
+  
 </module>

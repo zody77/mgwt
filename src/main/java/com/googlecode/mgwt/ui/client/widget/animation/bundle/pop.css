@@ -41,3 +41,49 @@
     opacity: 0;
   }
 }
+
+@if user.agent ie10 {
+	.in, .out {
+	  animation-timing-function: ease-in-out;
+	  animation-duration: 300ms;
+	  animation-fill-mode: both;
+	}
+	
+	.in {
+	  animation-name: popin;
+	}
+	
+	.out {
+	  animation-name: popout;
+	}
+	
+	.in.reverse {
+	  animation-name: popin;
+	}
+	
+	.out.reverse {
+	  animation-name: popout;
+	}
+	
+	@keyframes popin {
+	  from {
+	    transform: scale(.3);
+	    opacity: 0;
+	  }
+	  to {
+	    transform: scale(1);
+	    opacity: 1;
+	  }
+	}
+	
+	@keyframes popout {
+	  from {
+	    transform: scale(1);
+	    opacity: 1;
+	  }
+	  to {
+	    transform: scale(.3);
+	    opacity: 0;
+	  }
+	}
+}

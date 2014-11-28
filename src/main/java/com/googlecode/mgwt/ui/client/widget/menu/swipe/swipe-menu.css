@@ -40,6 +40,15 @@
   }
 }
 
+@if user.agent ie10 {
+  .opened {
+    transform: translate3d(0, 0, 0);
+  }
+  .closed {
+    transform: translate3d(-40%, 0, 0);
+  }
+}
+
 @if user.agent gecko1_8 {
   .opened {
     -moz-transform: translate3d(0, 0, 0);

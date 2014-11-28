@@ -17,6 +17,13 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-FlexPanel {
+    display: -ms-flexbox;
+    -ms-flex-direction: column;
+  }
+}
+
 .mgwt-FlexPanel {
   display: flex;
   flex-direction: column;
@@ -34,6 +41,12 @@
   .mgwt-FlexPanel-flex {
     -webkit-box-flex: 1; /* iOS < 7 && Android < 4.4*/
     -webkit-flex: 1;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-FlexPanel-flex {
+    -ms-flex: 1;
   }
 }
 

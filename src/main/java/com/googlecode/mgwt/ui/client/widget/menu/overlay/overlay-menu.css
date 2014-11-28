@@ -39,18 +39,27 @@
 
 @if user.agent safari {
   .mgwt-OverlayMenu-nav {
-    -webkit-transform-property: opacity;
+    -webkit-transition-property: opacity;
   }
   .mgwt-OverlayMenu-main {
-    -webkit-transform-property: left;
+    -webkit-transition-property: left;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-OverlayMenu-nav {
+    transition-property: opacity;
+  }
+  .mgwt-OverlayMenu-main {
+    transition-property: left;
   }
 }
 
 @if user.agent gecko1_8 {
   .mgwt-OverlayMenu-nav {
-    -moz-transform-property: opacity;
+    -moz-transition-property: opacity;
   }
   .mgwt-OverlayMenu-main {
-    -moz-transform-property: left;
+    -moz-transition-property: left;
   }
 }

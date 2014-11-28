@@ -50,6 +50,8 @@
 	    }else{
 	      return "tablet";
 	    }
+      } else if (ua.indexOf("windows phone 8") != -1) {
+        return "phone";
       }
       
       // Everything else is a desktop.
@@ -78,4 +80,19 @@
     <replace-with class="com.googlecode.mgwt.dom.client.recognizer.EventPropagatorMobileImpl">
         <when-type-is class="com.googlecode.mgwt.dom.client.recognizer.EventPropagator"/>
     </replace-with>
+
+    <replace-with class="com.googlecode.mgwt.dom.client.recognizer.EventPropagatorStandardImpl">
+        <when-type-is class="com.googlecode.mgwt.dom.client.recognizer.EventPropagator"/>
+        <all>
+            <when-property-is name="user.agent" value="ie10" />
+        </all>
+    </replace-with>
+
+    <replace-with class="com.google.gwt.user.client.impl.DOMImplIE10">
+        <when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>
+        <all>
+            <when-property-is name="user.agent" value="ie10"/>
+        </all>
+    </replace-with>
+    
 </module>

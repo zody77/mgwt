@@ -151,6 +151,24 @@ public class MGWT {
     }
 
     scrollingDisabled = settings.isPreventScrolling();
+
+    if (MGWT.getOsDetection().isWindowsPhone())
+    {
+      MetaElement ieCompatible = Document.get().createMetaElement();
+      ieCompatible.setHttpEquiv("IE=10");
+      head.appendChild(ieCompatible);
+      
+      MetaElement tapHighlight = Document.get().createMetaElement();
+      tapHighlight.setName("msapplication-tap-highlight");
+      tapHighlight.setContent("no");
+      head.appendChild(tapHighlight);
+
+      if (settings.isPreventScrolling()) {
+        BodyElement body = Document.get().getBody();
+        setupPreventScrollingIE10(body);
+      }
+    }
+
     if (settings.isPreventScrolling() && getOsDetection().isIOs()) {
       BodyElement body = Document.get().getBody();
       setupPreventScrolling(body);
@@ -304,6 +322,10 @@ public class MGWT {
 		el.ontouchmove = func;
 
   }-*/;
+
+  private static void setupPreventScrollingIE10(Element el) {
+    el.setAttribute("style", "-ms-touch-action: none;");
+  }
 
   /**
    * A utility method to hide the soft keyboard

@@ -17,6 +17,15 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-TextBox, .mgwt-InputBox-box, .mgwt-PasswordTextBox,
+  .mgwt-InputBox-box, .mgwt-TextArea, .mgwt-InputBox-box {
+    display: -ms-flexbox;
+    -ms-flex: 1;
+    -ms-user-select: text;
+  }
+}
+
 @if user.agent gecko1_8 {
   .mgwt-TextBox, .mgwt-InputBox-box, .mgwt-PasswordTextBox,
   .mgwt-InputBox-box, .mgwt-TextArea, .mgwt-InputBox-box {

@@ -100,7 +100,7 @@ public class ImageConverter {
     }
   }
 
-  public ImageResource convert(ImageResource resource, String color) {
+  public void convert(final ImageResource resource, String color, final ImageConverterCallback imageConverterCallback) {
 
     if (color == null) {
       throw new IllegalArgumentException();
@@ -110,49 +110,71 @@ public class ImageConverter {
       throw new IllegalArgumentException();
     }
 
-    int hexColor = Integer.parseInt(color.substring(1), 16);
+    final int hexColor = Integer.parseInt(color.substring(1), 16);
 
-    int red = hexColor >> 16 & 0xFF;
-    int green = hexColor >> 8 & 0xFF;
-    int blue = hexColor & 0xFF;
+    final int red = hexColor >> 16 & 0xFF;
+    final int green = hexColor >> 8 & 0xFF;
+    final int blue = hexColor & 0xFF;
 
-    int height = resource.getHeight();
-    int width = resource.getWidth();
+    final int height = resource.getHeight();
+    final int width = resource.getWidth();
 
-    ImageElement imageElement = loadImage(resource.getSafeUri().asString(),
-        width, height);
+    loadImage(resource.getSafeUri().asString(), width, height, new LoadImageCallback() {
+      @Override
+      public void onFailure(Throwable caught)
+      {
+        imageConverterCallback.onFailure(caught);
+      }
 
-    Canvas canvas = Canvas.createIfSupported();
-    canvas.getElement().setPropertyInt("height", height);
-   canvas.getElement().setPropertyInt("width", width);
+      @Override
+      public void onSuccess(ImageElement imageElement)
+      {
+        try
+        {
+          Canvas canvas = Canvas.createIfSupported();
+          canvas.getElement().setPropertyInt("height", height);
+          canvas.getElement().setPropertyInt("width", width);
 
-    Context2d context = canvas.getContext2d();
-    context.drawImage(imageElement, 0, 0);
-    ImageData imageData = context.getImageData(0, 0, width,
-        height);
+          Context2d context = canvas.getContext2d();
+          context.drawImage(imageElement, 0, 0);
+          ImageData imageData = context.getImageData(0, 0, width, height);
 
-    CanvasPixelArray canvasPixelArray = imageData.getData();
+          CanvasPixelArray canvasPixelArray = imageData.getData();
 
-    for (int i = 0; i < canvasPixelArray.getLength(); i += 4) {
-      canvasPixelArray.set(i, red);
-      canvasPixelArray.set(i + 1, green);
-      canvasPixelArray.set(i + 2, blue);
-      canvasPixelArray.set(i + 3,
-      canvasPixelArray.get(i + 3));
-    }
-    context.putImageData(imageData, 0, 0);
+          for (int i = 0; i < canvasPixelArray.getLength(); i += 4) {
+            canvasPixelArray.set(i, red);
+            canvasPixelArray.set(i + 1, green);
+            canvasPixelArray.set(i + 2, blue);
+            canvasPixelArray.set(i + 3,
+            canvasPixelArray.get(i + 3));
+          }
+          context.putImageData(imageData, 0, 0);
+          imageConverterCallback.onSuccess(new ConvertedImageResource(
+                  canvas.toDataUrl("image/png"), resource.getWidth(),
+                  resource.getHeight()));
+        }
+        catch(Throwable e)
+        {
+          this.onFailure(e);
+        }
+      }
+    });
 
-
-    return new ConvertedImageResource(
-        canvas.toDataUrl("image/png"), resource.getWidth(),
-        resource.getHeight());
   }
 
-  protected native ImageElement loadImage(String dataUrl, int width, int height) /*-{
+  protected native void loadImage(String dataUrl, int width, int height, LoadImageCallback callback) /*-{
     var img = new Image();
     img.width = width;
     img.height = height;
     img.src = dataUrl;
-    return img;
+    img.onload = $entry(function(){
+      callback.@com.googlecode.mgwt.image.client.LoadImageCallback::onSuccess(Lcom/google/gwt/dom/client/ImageElement;)(img);
+    });
+    img.onerror = $entry(function(e){
+      callback.@com.googlecode.mgwt.image.client.LoadImageCallback::onFailure(Ljava/lang/Throwable;)(e);
+    });
+    img.onabort = $entry(function(e){
+      callback.@com.googlecode.mgwt.image.client.LoadImageCallback::onFailure(Ljava/lang/Throwable;)(e);
+    });
   }-*/;
 }
