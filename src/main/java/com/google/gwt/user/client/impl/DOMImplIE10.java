@@ -25,9 +25,18 @@ public class DOMImplIE10 extends DOMImplIE9 {
   
   static
   {
-    DOMImplStandard.addCaptureEventDispatchers(getCaptureEventDispatchers());
+    //DOMImplStandard.addCaptureEventDispatchers(getCaptureEventDispa
     DOMImplStandard.addBitlessEventDispatchers(getBitlessEventDispatchers());
+    capturePointerEvents();
   }
+  
+  /**
+   * Lets have the same behaviour as IOS where the target element continues to receive pointer events
+   * even when the pointer has moved off the element up until pointer up has occured
+   */
+  private native static void capturePointerEvents() /*-{
+    $wnd.addEventListener('MSPointerDown',function(evt){evt.target.msSetPointerCapture(evt.pointerId);}, true);
+  }-*/;
 
   public static native JavaScriptObject getCaptureEventDispatchers() /*-{
     return {

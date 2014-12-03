@@ -52,6 +52,14 @@ public class FlexPropertyHelperIE10 extends FlexPropertyHelper {
         value = "column";
         break;
       }
+      case HORIZONTAL_REVERSE: {
+        value = "row-reverse";
+        break;
+      }
+      case VERTICAL_REVERSE: {
+        value = "column-reverse";
+        break;
+      }
       default: {
         value = "";
         break;
@@ -123,9 +131,12 @@ public class FlexPropertyHelperIE10 extends FlexPropertyHelper {
     setStyleProperty(el, "msFlexItemAlign", value);
   }
 
+  /**
+   * IE10/11 sets flex-shrink to 0 if omitted whereas webkit sets to 1, so lets copy webkit
+   */
   @Override
   protected void _setFlex(Element el, double grow, String basis) {
-    setStyleProperty(el,"msFlex", Double.toString(grow)+" "+(basis == null ? "0%" : basis));
+    _setFlex(el,grow,1,basis);
   }
 
   @Override

@@ -53,10 +53,6 @@ under * the License.
   <define-configuration-property name="mgwt.css.inject" is-multi-valued="false" />
   <set-configuration-property name="mgwt.css.inject" value="end" />
 
-<!--   <generate-with class="com.googlecode.mgwt.ui.generator.OsDetectionGenerator"> -->
-<!--     <when-type-assignable class="com.googlecode.mgwt.ui.client.OsDetection" /> -->
-<!--   </generate-with> -->
-
   <generate-with class="com.googlecode.mgwt.ui.generator.DeviceDensityGenerator">
     <when-type-assignable class="com.googlecode.mgwt.ui.client.DeviceDensity" />
   </generate-with>
@@ -118,6 +114,24 @@ under * the License.
     <any> 
       <when-property-is name="user.agent" value="ie10" />
     </any>
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.TouchSupport.TouchSupportStandard">
+    <when-type-is class="com.googlecode.mgwt.ui.client.TouchSupport" />
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.TouchSupport.TouchSupportNative">
+    <when-type-is class="com.googlecode.mgwt.ui.client.TouchSupport" />
+    <all>
+      <when-property-is name="mgwt.user.agent" value="mobile"/>
+    </all>
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.TouchSupport.TouchSupportEmulatedPointer">
+    <when-type-is class="com.googlecode.mgwt.ui.client.TouchSupport" />
+    <all> 
+      <when-property-is name="user.agent" value="ie10" />
+    </all>
   </replace-with>
 
   <!-- ButtonBar Buttons -->

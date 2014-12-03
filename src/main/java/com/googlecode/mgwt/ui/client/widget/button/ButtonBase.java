@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.HasText;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchHandler;
-import com.googlecode.mgwt.ui.client.MGWT;
+import com.googlecode.mgwt.ui.client.TouchSupport;
 import com.googlecode.mgwt.ui.client.widget.touch.TouchWidget;
 
 /**
@@ -77,7 +77,7 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
           event.stopPropagation();
           event.preventDefault();
           removeStyleName(ButtonBase.this.baseAppearance.css().active());
-          if (MGWT.getFormFactor().isDesktop() || MGWT.getOsDetection().isWindowsPhone()) {
+          if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
             DOM.releaseCapture(getElement());
           }
           active = false;
@@ -88,7 +88,7 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
           event.stopPropagation();
           event.preventDefault();
           removeStyleName(ButtonBase.this.baseAppearance.css().active());
-          if (MGWT.getFormFactor().isDesktop() || MGWT.getOsDetection().isWindowsPhone()) {
+          if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
             DOM.releaseCapture(getElement());
           }
           active = false;
@@ -105,7 +105,7 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
           event.stopPropagation();
           event.preventDefault();
           addStyleName(ButtonBase.this.baseAppearance.css().active());
-          if (MGWT.getFormFactor().isDesktop() || MGWT.getOsDetection().isWindowsPhone()) {
+          if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
             DOM.setCapture(getElement());
           }
           active = true;

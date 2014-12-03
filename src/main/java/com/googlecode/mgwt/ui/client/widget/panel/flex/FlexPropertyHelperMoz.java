@@ -47,6 +47,14 @@ public class FlexPropertyHelperMoz extends FlexPropertyHelper {
         value = "column";
         break;
       }
+      case HORIZONTAL_REVERSE: {
+        value = "row-reverse";
+        break;
+      }
+      case VERTICAL_REVERSE: {
+        value = "column-reverse";
+        break;
+      }
       default: {
         value = "";
         break;

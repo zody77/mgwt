@@ -35,7 +35,7 @@ public abstract class FlexPropertyHelper {
   }
   
   public static enum Orientation {
-    HORIZONTAL, VERTICAL;
+    HORIZONTAL, HORIZONTAL_REVERSE, VERTICAL, VERTICAL_REVERSE;
   }
 
   public static void setElementAsFlexContainer(Element el)

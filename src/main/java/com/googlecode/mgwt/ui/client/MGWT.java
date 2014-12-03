@@ -152,7 +152,7 @@ public class MGWT {
 
     scrollingDisabled = settings.isPreventScrolling();
 
-    if (MGWT.getOsDetection().isWindowsPhone())
+    if (TouchSupport.isTouchEventsEmulatedUsingPointerEvents())
     {
       MetaElement ieCompatible = Document.get().createMetaElement();
       ieCompatible.setHttpEquiv("IE=10");

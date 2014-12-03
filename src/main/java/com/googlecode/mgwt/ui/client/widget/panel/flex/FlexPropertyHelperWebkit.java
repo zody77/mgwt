@@ -45,6 +45,7 @@ public class FlexPropertyHelperWebkit extends FlexPropertyHelper {
   @Override
   public void _setOrientationProperty(Element el, Orientation orientation) {
     String orientationOldSyntax, orientationNewSyntax;
+    boolean reverse = false;
     switch (orientation) {
       case HORIZONTAL: {
         orientationOldSyntax = "horizontal";
@@ -56,6 +57,16 @@ public class FlexPropertyHelperWebkit extends FlexPropertyHelper {
         orientationNewSyntax = "column";
         break;
       }
+      case HORIZONTAL_REVERSE: {
+        orientationOldSyntax = "horizontal"; reverse = true;
+        orientationNewSyntax = "row-reverse";
+        break;
+      }
+      case VERTICAL_REVERSE: {
+        orientationOldSyntax = "vertical"; reverse = true;
+        orientationNewSyntax = "column-reverse";
+        break;
+      }
       default: {
         orientationOldSyntax = "";
         orientationNewSyntax = "";
@@ -63,6 +74,7 @@ public class FlexPropertyHelperWebkit extends FlexPropertyHelper {
       }
     }
     setStyleProperty(el, "WebkitBoxOrient", orientationOldSyntax);
+    setStyleProperty(el, "WebkitBoxDirection", reverse ? "reverse" : "normal");
     setStyleProperty(el, "WebkitFlexDirection", orientationNewSyntax);
   }
 
