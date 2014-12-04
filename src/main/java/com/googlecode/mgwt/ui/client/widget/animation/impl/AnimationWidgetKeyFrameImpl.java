@@ -186,7 +186,7 @@ public class AnimationWidgetKeyFrameImpl implements AnimationWidgetImpl {
 
   private native void blurBeforeAnimation() /*-{
   	var node = $doc.querySelector(":focus");
-  	if (node != null) {
+  	if ((node != null) && !((node.nodeType === 1) && (node.nodeName === "BODY"))) {
   		if (typeof (node.blur) == "function") {
   			node.blur();
   		}
