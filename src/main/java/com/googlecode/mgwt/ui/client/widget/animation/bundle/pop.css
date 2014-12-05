@@ -1,3 +1,4 @@
+@if user.agent safari {
 .in, .out {
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-duration: 300ms;
@@ -40,6 +41,7 @@
     -webkit-transform: scale(.3);
     opacity: 0;
   }
+}
 }
 
 @if user.agent ie10 {

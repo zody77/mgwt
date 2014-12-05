@@ -1,3 +1,4 @@
+@if user.agent safari {
 .in, .out {
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-duration: 300ms;
@@ -27,6 +28,7 @@
 @-webkit-keyframes fadeout {
   from { opacity: 1; }
   to { opacity: 0; }
+}
 }
 
 @if user.agent ie10 {

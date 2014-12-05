@@ -18,7 +18,7 @@
 @if user.agent ie10 {
   .mgwt-Carousel {
     display: -ms-flexbox;
-    -ms-flex: 1;
+    -ms-flex: 1 1;
   }
 }
 
@@ -38,7 +38,7 @@
 
 @if user.agent ie10 {
   .mgwt-Carousel-Scroller, .mgwt-Carousel-Container  {
-    -ms-flex: 1;
+    -ms-flex: 1 1;
   }
 }
 

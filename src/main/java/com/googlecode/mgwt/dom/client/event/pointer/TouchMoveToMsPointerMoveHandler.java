@@ -35,7 +35,7 @@ public class TouchMoveToMsPointerMoveHandler implements MsPointerMoveHandler, Ms
   public void onPointerMove(MsPointerMoveEvent event) {
     if (ignoreEvent)
       return;
-		touchMoveHandler.onTouchMove(new SimulatedTouchMoveEvent(event, TouchStartToMsPointerDownHandler.lastTouchId));
+		touchMoveHandler.onTouchMove(new SimulatedTouchMoveEvent(event));
 	}
 
   @Override

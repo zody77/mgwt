@@ -1,3 +1,4 @@
+@if user.agent safari {
 .in, .out {
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-fill-mode: both;
@@ -78,6 +79,7 @@
   100% {
     -webkit-transform: translate3d(0px, 0px, 0px) rotateY(0deg);
   }
+}
 }
 
 @if user.agent ie10 {

@@ -33,11 +33,11 @@
   .mgwt-RadioButton {
     display: -ms-flexbox;
     -ms-flex-direction: row;
-    -ms-flex: 1;
+    -ms-flex: 1 1;
   }
   .mgwt-RadioButton-label {
     display: -ms-flexbox;
-    -ms-flex: 1;
+    -ms-flex: 1 1;
   }
 }
 

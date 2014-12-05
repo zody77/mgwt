@@ -23,8 +23,6 @@ import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
-
-import com.googlecode.mgwt.dom.client.event.mouse.HandlerRegistrationCollection;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
@@ -83,13 +81,7 @@ public class TouchPanel extends FlowPanel implements HasTouchHandlers, HasTapHan
 
 	@Override
 	public HandlerRegistration addTouchHandler(TouchHandler handler) {
-		HandlerRegistrationCollection handlerRegistrationCollection = new HandlerRegistrationCollection();
-
-		handlerRegistrationCollection.addHandlerRegistration(addTouchCancelHandler(handler));
-		handlerRegistrationCollection.addHandlerRegistration(addTouchStartHandler(handler));
-		handlerRegistrationCollection.addHandlerRegistration(addTouchEndHandler(handler));
-		handlerRegistrationCollection.addHandlerRegistration(addTouchMoveHandler(handler));
-		return handlerRegistrationCollection;
+	  return impl.addTouchHandler(this, handler);
 	}
 
 	@Override

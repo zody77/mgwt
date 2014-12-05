@@ -1,3 +1,4 @@
+@if user.agent safari {
 .in, .out {
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-duration: 300ms;
@@ -40,6 +41,7 @@
 @-webkit-keyframes flipouttoright {
   from { -webkit-transform: rotateY(0) scale(1); }
   to { -webkit-transform: rotateY(180deg) scale(.8); }
+}
 }
 
 @if user.agent ie10 {

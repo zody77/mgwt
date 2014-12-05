@@ -28,7 +28,7 @@ public class TouchEndToMsPointerUpHandler implements MsPointerUpHandler {
   /** {@inheritDoc} */
   @Override
   public void onPointerUp(MsPointerUpEvent event) {
-    SimulatedTouchEndEvent simulatedTouchEndEvent = new SimulatedTouchEndEvent(event, TouchStartToMsPointerDownHandler.lastTouchId);
+    SimulatedTouchEndEvent simulatedTouchEndEvent = new SimulatedTouchEndEvent(event);
     handler.onTouchEnd(simulatedTouchEndEvent);
   }
 

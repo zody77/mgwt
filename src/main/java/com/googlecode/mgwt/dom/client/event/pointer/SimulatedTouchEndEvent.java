@@ -31,17 +31,17 @@ public class SimulatedTouchEndEvent extends TouchEndEvent {
   /**
    * Construct a simulated TouchEndEvent from a {@link MsPointerUpEvent}
    * 
-   * @param pointerUpEvent the data for the simulated event;
+   * @param event the data for the simulated event;
    * @param multiTouch
    */
-  public SimulatedTouchEndEvent(MsPointerUpEvent pointerUpEvent, int touchId) {
-    clientX = pointerUpEvent.getClientX();
-    clientY = pointerUpEvent.getClientY();
-    this.touchId = touchId;
-    pageX = pointerUpEvent.getScreenX();
-    pageY = pointerUpEvent.getScreenY();
-    setNativeEvent(pointerUpEvent.getNativeEvent());
-    setSource(pointerUpEvent.getSource());
+  public SimulatedTouchEndEvent(MsPointerUpEvent event) {
+    this.touchId = event.getPointerId();
+    clientX = event.getClientX();
+    clientY = event.getClientY();
+    pageX = event.getScreenX();
+    pageY = event.getScreenY();
+    setNativeEvent(event.getNativeEvent());
+    setSource(event.getSource());
   }
 
   @Override

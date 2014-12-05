@@ -43,7 +43,7 @@
   }
 }
 
-@if user.agent safari {
+@if user.agent ie10 {
   .mgwt-WidgetList-Entry {
     display: -ms-flexbox;
   }

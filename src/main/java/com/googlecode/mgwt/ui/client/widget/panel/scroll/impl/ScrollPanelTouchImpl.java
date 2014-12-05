@@ -32,7 +32,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
-
 import com.googlecode.mgwt.collection.shared.CollectionFactory;
 import com.googlecode.mgwt.collection.shared.LightArray;
 import com.googlecode.mgwt.collection.shared.LightArrayInt;
@@ -42,6 +41,7 @@ import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeEvent;
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchHandler;
 import com.googlecode.mgwt.ui.client.MGWT;
+import com.googlecode.mgwt.ui.client.TouchSupport;
 import com.googlecode.mgwt.ui.client.util.CssUtil;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.BeforeScrollEndEvent;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.BeforeScrollMoveEvent;
@@ -334,7 +334,7 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl {
 
     this.fixedScrollbar = MGWT.getOsDetection().isAndroid() && !MGWT.getOsDetection().isAndroid4_4_OrHigher();
     this.hideScrollBar = true;
-    this.fadeScrollBar = MGWT.getOsDetection().isIOs() && CssUtil.has3d();
+    this.fadeScrollBar = (MGWT.getOsDetection().isIOs() || MGWT.getOsDetection().isWindowsPhone()) && CssUtil.has3d();
 
     // array for scrollbars
     this.scrollBar = new boolean[2];
@@ -1596,7 +1596,7 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl {
     // clear old event handlers
     unbindStartEvent();
     unbindResizeEvent();
-    if (MGWT.getOsDetection().isDesktop()) {
+    if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
       unbindMouseoutEvent();
       unbindMouseWheelEvent();
     }
@@ -1616,7 +1616,7 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl {
       if (isAttached()) {
         bindResizeEvent();
         bindStartEvent();
-        if (MGWT.getOsDetection().isDesktop()) {
+        if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
           bindMouseoutEvent();
           bindMouseWheelEvent();
         }
@@ -1650,7 +1650,7 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl {
       // bind events
       bindResizeEvent();
       bindStartEvent();
-      if (MGWT.getOsDetection().isDesktop()) {
+      if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
         bindMouseoutEvent();
         bindMouseWheelEvent();
       }

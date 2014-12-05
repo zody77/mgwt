@@ -28,8 +28,8 @@ public class SimulatedTouchMoveEvent extends TouchMoveEvent {
   private final int pageY;
   private int touchId;
 
-  public SimulatedTouchMoveEvent(MsPointerMoveEvent event, int touchId) {
-    this.touchId = touchId;
+  public SimulatedTouchMoveEvent(MsPointerMoveEvent event) {
+    this.touchId = event.getPointerId();
     clientX = event.getClientX();
     clientY = event.getClientY();
     pageX = event.getScreenX();

@@ -26,7 +26,7 @@
 
 @if user.agent ie10 {
   .mgwt-DialogButton  {
-    -ms-flex: 1;
+    -ms-flex: 1 1;
   }
 }
 

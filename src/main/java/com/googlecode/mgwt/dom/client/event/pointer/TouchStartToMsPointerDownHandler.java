@@ -22,16 +22,13 @@ public class TouchStartToMsPointerDownHandler implements MsPointerDownHandler {
 
   private final TouchStartHandler handler;
 
-  public static int lastTouchId = 0;
-
   public TouchStartToMsPointerDownHandler(TouchStartHandler handler) {
     this.handler = handler;
   }
 
   @Override
   public void onPointerDown(MsPointerDownEvent event) {
-    lastTouchId++;
-    SimulatedTouchStartEvent simulatedTouchStartEvent = new SimulatedTouchStartEvent(event, lastTouchId);
+    SimulatedTouchStartEvent simulatedTouchStartEvent = new SimulatedTouchStartEvent(event);
     handler.onTouchStart(simulatedTouchStartEvent);
   }
 
