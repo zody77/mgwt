@@ -16,6 +16,7 @@
 package com.google.gwt.user.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.googlecode.mgwt.ui.client.MGWT;
 
 
 /**
@@ -25,19 +26,44 @@ public class DOMImplIE10 extends DOMImplIE9 {
   
   static
   {
-    //DOMImplStandard.addCaptureEventDispatchers(getCaptureEventDispa
+    DOMImplStandard.addCaptureEventDispatchers(getCaptureEventDispatchers());
     DOMImplStandard.addBitlessEventDispatchers(getBitlessEventDispatchers());
-    capturePointerEvents();
+    if (MGWT.getOsDetection().isWindowsPhone()) {
+      capturePointerEvents();
+    }
+    else {
+      // for desktop we need a focus fix
+      capturePointerEventsWithFocusFix();
+    }
   }
   
   /**
-   * Lets have the same behaviour as IOS where the target element continues to receive pointer events
-   * even when the pointer has moved off the element up until pointer up has occured
+   * Lets have the same behaviour as IOS where the target element continues to receive Pointer events
+   * even when the pointer has moved off the element up until MSPointerUp has occurred. 
    */
   private native static void capturePointerEvents() /*-{
-    $wnd.addEventListener('MSPointerDown',function(evt){evt.target.msSetPointerCapture(evt.pointerId);}, true);
+    $wnd.addEventListener('MSPointerDown',
+      function(evt) {
+        evt.target.msSetPointerCapture(evt.pointerId);
+      }, true);
   }-*/;
 
+  /**
+   * On desktop, for some reason when you do pointer capture input elements fail to get the focus
+   */
+  private native static void capturePointerEventsWithFocusFix() /*-{
+    var getFocus = function(evt) {
+      this.focus()
+    };
+    $wnd.addEventListener('MSPointerDown',
+      function(evt) {
+        evt.target.msSetPointerCapture(evt.pointerId);
+        if (evt.target.focus) {
+          evt.target.addEventListener('MSPointerUp',getFocus);
+        }
+      }, true);
+  }-*/;
+  
   public static native JavaScriptObject getCaptureEventDispatchers() /*-{
     return {
       MSPointerDown:   @com.google.gwt.user.client.impl.DOMImplStandard::dispatchCapturedMouseEvent(*),
