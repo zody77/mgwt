@@ -16,7 +16,6 @@
 package com.google.gwt.user.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.googlecode.mgwt.ui.client.MGWT;
 
 
 /**
@@ -28,41 +27,24 @@ public class DOMImplIE10 extends DOMImplIE9 {
   {
     DOMImplStandard.addCaptureEventDispatchers(getCaptureEventDispatchers());
     DOMImplStandard.addBitlessEventDispatchers(getBitlessEventDispatchers());
-    if (MGWT.getOsDetection().isWindowsPhone()) {
-      capturePointerEvents();
-    }
-    else {
-      // for desktop we need a focus fix
-      capturePointerEventsWithFocusFix();
-    }
+    capturePointerEvents();
   }
   
   /**
    * Lets have the same behaviour as IOS where the target element continues to receive Pointer events
-   * even when the pointer has moved off the element up until MSPointerUp has occurred. 
+   * even when the pointer has moved off the element up until MSPointerUp has occurred.
+   * 
+   *  Do not do pointer capture on input or textarea elements, all sorts of problems arise if you do!
    */
   private native static void capturePointerEvents() /*-{
-    $wnd.addEventListener('MSPointerDown',
-      function(evt) {
-        evt.target.msSetPointerCapture(evt.pointerId);
-      }, true);
+      $wnd.addEventListener('MSPointerDown',
+        $entry(function(evt) {
+          if ((evt.target.tagName !== 'INPUT') && (evt.target.tagName !== 'TEXTAREA'))  {
+            evt.target.msSetPointerCapture(evt.pointerId);
+          }
+        }), true);
   }-*/;
 
-  /**
-   * On desktop, for some reason when you do pointer capture input elements fail to get the focus
-   */
-  private native static void capturePointerEventsWithFocusFix() /*-{
-    var getFocus = function(evt) {
-      this.focus()
-    };
-    $wnd.addEventListener('MSPointerDown',
-      function(evt) {
-        evt.target.msSetPointerCapture(evt.pointerId);
-        if (evt.target.focus) {
-          evt.target.addEventListener('MSPointerUp',getFocus);
-        }
-      }, true);
-  }-*/;
   
   public static native JavaScriptObject getCaptureEventDispatchers() /*-{
     return {
