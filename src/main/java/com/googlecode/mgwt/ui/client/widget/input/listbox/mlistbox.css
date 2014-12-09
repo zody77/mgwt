@@ -21,6 +21,10 @@
     display: -ms-flexbox;
     -ms-user-select: text;
   }
+
+  select::-ms-expand {
+    display: none;
+  }
 }
 
 @if user.agent gecko1_8 {
