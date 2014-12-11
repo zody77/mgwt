@@ -38,7 +38,10 @@
 
       // Detect form factor from user agent.
       var ua = navigator.userAgent.toLowerCase();
-      if (ua.indexOf("iphone") != -1 || ua.indexOf("ipod") != -1) {
+      if (ua.indexOf("windows phone 8") != -1) {
+        // windows phone 8/8.1
+        return "phone";
+      } else if (ua.indexOf("iphone") != -1 || ua.indexOf("ipod") != -1) {
         // iphone and ipod.
         return "phone";
       } else if (ua.indexOf("ipad") != -1) {
@@ -50,8 +53,6 @@
 	    }else{
 	      return "tablet";
 	    }
-      } else if (ua.indexOf("windows phone 8") != -1) {
-        return "phone";
       }
       
       // Everything else is a desktop.
@@ -59,6 +60,14 @@
     ]]></property-provider>
     <define-property name="mgwt.density" values="mid, high, xhigh" />
     <property-provider name="mgwt.density"><![CDATA[
+        if (!window.devicePixelRatio) {
+          try {
+            if ('deviceXDPI' in screen) {
+              window.devicePixelRatio = screen.deviceXDPI / screen.logicalXDPI;
+            }
+          }
+          catch(e) {}
+        }
         if (!window.devicePixelRatio) {
           return 'mid';
         }

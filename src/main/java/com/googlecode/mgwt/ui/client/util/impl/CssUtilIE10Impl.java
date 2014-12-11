@@ -3,6 +3,13 @@ package com.googlecode.mgwt.ui.client.util.impl;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.dom.client.Element;
 
+/**
+ * No idea why but there is a slight difference between Windows Phone 8.1 and
+ * Windows Phone 8.1 Update. To force getComputedStyle to return a 3D matrix for
+ * the transform property the translate3d function needs a non-zero z value.
+ * Windows Phone 8.1 works if you specify 0 but Windows Phone 8.1 Update does not, it returns
+ * a 2D matrix. So we force a 3D matrix to be returned by specifying a z value of -1px
+ */
 public class CssUtilIE10Impl implements CssUtilImpl {
 
   public CssUtilIE10Impl() {
@@ -10,7 +17,7 @@ public class CssUtilIE10Impl implements CssUtilImpl {
 
   @Override
   public void translate(Element el, int x, int y) {
-    String cssText = "translate3d(" + x + "px, " + y + "px, 0px)";
+    String cssText = "translate3d(" + x + "px, " + y + "px, -1px)";
     _translate(el, cssText);
   }
 
@@ -104,13 +111,13 @@ public class CssUtilIE10Impl implements CssUtilImpl {
 
   @Override
   public void setTranslateAndZoom(Element el, int x, int y, double scale) {
-    String cssText = "translate3d(" + x + "px, " + y + "px, 0px) scale(" + scale + ")";
+    String cssText = "translate3d(" + x + "px, " + y + "px, -1px) scale(" + scale + ")";
     el.getStyle().setProperty("transform", cssText);
   }
 
   @Override
   public void translatePercent(Element el, double x, double y) {
-    String cssText = "translate3d(" + x + "%, " + y + "%, 0px)";
+    String cssText = "translate3d(" + x + "%, " + y + "%, -1px)";
     _translate(el, cssText);
   }
 
