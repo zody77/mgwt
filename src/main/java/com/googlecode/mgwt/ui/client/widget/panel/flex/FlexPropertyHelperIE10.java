@@ -131,6 +131,32 @@ public class FlexPropertyHelperIE10 extends FlexPropertyHelper {
     setStyleProperty(el, "msFlexItemAlign", value);
   }
 
+  @Override
+  protected void _setFlexWrapProperty(Element el, FlexWrap flexWrap)
+  {
+    String value;
+    switch (flexWrap) {
+      case NOWRAP: {
+        value = "nowrap";
+        break;
+      }
+      case WRAP: {
+        value = "wrap";
+        break;
+      }
+      case WRAP_REVERSE: {
+        value = "wrap-reverse";
+        break;
+      }
+      default: {
+        value = "nowrap";
+        break;
+      }
+    }
+    setStyleProperty(el, "msFlexWrap", value);
+  }
+
+
   /**
    * IE10/11 sets flex-shrink to 0 if omitted whereas webkit sets to 1, so lets copy webkit
    */

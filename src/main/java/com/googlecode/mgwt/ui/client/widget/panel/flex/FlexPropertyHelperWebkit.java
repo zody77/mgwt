@@ -149,6 +149,36 @@ public class FlexPropertyHelperWebkit extends FlexPropertyHelper {
   }
 
   @Override
+  protected void _setFlexWrapProperty(Element el, FlexWrap flexWrap)
+  {
+    String flexWrapOldSyntax, flexWrapNewSyntax;
+    switch (flexWrap) {
+      case NOWRAP: {
+        flexWrapOldSyntax = "single";
+        flexWrapNewSyntax = "nowrap";
+        break;
+      }
+      case WRAP: {
+        flexWrapOldSyntax = "multiple";
+        flexWrapNewSyntax = "wrap";
+        break;
+      }
+      case WRAP_REVERSE: {
+        flexWrapOldSyntax = "multiple";
+        flexWrapNewSyntax = "wrap";
+        break;
+      }
+      default: {
+        flexWrapOldSyntax = "single";
+        flexWrapNewSyntax = "nowrap";
+        break;
+      }
+    }
+    setStyleProperty(el, "WebkitBoxLines", flexWrapOldSyntax);
+    setStyleProperty(el, "WebkitFlexWrap", flexWrapNewSyntax);
+  }
+
+  @Override
   public void _setFlex(Element el, double grow, String basis) {
     setStyleProperty(el,"WebkitBoxFlex", Double.toString(grow));
     setStyleProperty(el,"WebkitFlex", Double.toString(grow)+(basis == null ? "0%" : basis));

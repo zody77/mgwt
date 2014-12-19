@@ -127,6 +127,31 @@ public class FlexPropertyHelperStandard extends FlexPropertyHelper {
   }
 
   @Override
+  protected void _setFlexWrapProperty(Element el, FlexWrap flexWrap)
+  {
+    String value;
+    switch (flexWrap) {
+      case NOWRAP: {
+        value = "nowrap";
+        break;
+      }
+      case WRAP: {
+        value = "wrap";
+        break;
+      }
+      case WRAP_REVERSE: {
+        value = "wrap-reverse";
+        break;
+      }
+      default: {
+        value = "nowrap";
+        break;
+      }
+    }
+    setStyleProperty(el, "flexWrap", value);
+  }
+
+  @Override
   protected void _setFlex(Element el, double grow, String basis) {
     setStyleProperty(el,"flex", Double.toString(grow)+" "+(basis == null ? "0%" : basis));
   }

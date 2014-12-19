@@ -38,6 +38,10 @@ public abstract class FlexPropertyHelper {
     HORIZONTAL, HORIZONTAL_REVERSE, VERTICAL, VERTICAL_REVERSE;
   }
 
+  public static enum FlexWrap {
+    NOWRAP, WRAP, WRAP_REVERSE;
+  }
+
   public static void setElementAsFlexContainer(Element el)
   {
     setElementAsFlexContainer(el, null);
@@ -88,6 +92,10 @@ public abstract class FlexPropertyHelper {
     impl._setJustificationProperty(el, justification);
   }
 
+  public static void setFlexWrap(Element el, FlexWrap flexWrap) {
+    impl._setFlexWrapProperty(el, flexWrap);
+  }
+
   public static void clearAlignment(Element el) {
     impl._setAlignmentProperty(el,Alignment.NONE);
   }
@@ -108,4 +116,5 @@ public abstract class FlexPropertyHelper {
   protected abstract void _setAlignmentSelfProperty(Element el, AlignmentSelf alignmentSelf);
   protected abstract void _setOrientationProperty(Element el, Orientation orientation);
   protected abstract void _setJustificationProperty(Element el, Justification justification);
+  protected abstract void _setFlexWrapProperty(Element el, FlexWrap flexWrap);
 }

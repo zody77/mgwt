@@ -123,7 +123,32 @@ public class FlexPropertyHelperMoz extends FlexPropertyHelper {
         value = "auto";
       }
     }
-    setStyleProperty(el, "alignSelf", value);
+    setStyleProperty(el, "MozAlignSelf", value);
+  }
+
+  @Override
+  protected void _setFlexWrapProperty(Element el, FlexWrap flexWrap)
+  {
+    String value;
+    switch (flexWrap) {
+      case NOWRAP: {
+        value = "nowrap";
+        break;
+      }
+      case WRAP: {
+        value = "wrap";
+        break;
+      }
+      case WRAP_REVERSE: {
+        value = "wrap-reverse";
+        break;
+      }
+      default: {
+        value = "nowrap";
+        break;
+      }
+    }
+    setStyleProperty(el, "MozFlexWrap", value);
   }
 
   @Override
