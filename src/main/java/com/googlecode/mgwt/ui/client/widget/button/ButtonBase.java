@@ -123,5 +123,8 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
     }
   }
   
+  public ButtonBaseAppearance getAppearance() {
+    return baseAppearance;
+  }
   
 }
