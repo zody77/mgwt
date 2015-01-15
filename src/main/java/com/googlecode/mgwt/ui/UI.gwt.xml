@@ -187,7 +187,19 @@ under * the License.
         <when-property-is name="mgwt.formfactor" value="phone" />
         <when-property-is name="mgwt.formfactor" value="tablet" />
       </any>
+      <none>
+        <when-property-is name="user.agent" value="ie10" />
+      </none>
   </replace-with>
+
+  <!-- but IE10 on wp8/desktop supports resize, IE11 on wp8.1 supports orientation events via the Screen object -->
+  <replace-with class="com.googlecode.mgwt.ui.client.util.impl.IEOrientationHandler">
+    <when-type-is class="com.googlecode.mgwt.ui.client.util.OrientationHandler" />
+      <all>
+        <when-property-is name="user.agent" value="ie10" />
+      </all>
+  </replace-with>
+
 
   <!-- rebind IconHandler implementation -->
   <replace-with class="com.googlecode.mgwt.ui.client.util.IconHandler.IconHandlerEmulatedImpl">
