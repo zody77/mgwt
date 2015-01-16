@@ -22,8 +22,8 @@ import com.googlecode.mgwt.ui.client.widget.main.MainResourceHolder;
  * fire on wp8 when the viewport is set to device-width. We fallback to resize events anyhow.
  */
 public class IEOrientationHandler implements OrientationHandler {
-	private static native JavaScriptObject setupOrientation0(
-  		IEOrientationHandler handler)/*-{
+  
+	private static native JavaScriptObject setupOrientation0(IEOrientationHandler handler)/*-{
   	var func = $entry(function(evt) {
   		handler.@com.googlecode.mgwt.ui.client.util.impl.IEOrientationHandler::onorientationChange(Ljava/lang/String;)(evt.target.msOrientation);
   	});
@@ -35,6 +35,8 @@ public class IEOrientationHandler implements OrientationHandler {
   	$wnd.screen.onmsorientationchange = null;
   }-*/;
 
+  private boolean orientationSupported = isOrientationSupported();
+  
   // update styles on body
   	private static void setClasses(ORIENTATION o) {
 
@@ -75,7 +77,6 @@ public class IEOrientationHandler implements OrientationHandler {
 	}
 
 	protected void setupNativeBrowerOrientationHandler() {
-	  Window.alert("Settting up native browser orientation handler");
 		nativeJsFunction = setupOrientation0(this);
 		Window.addCloseHandler(new CloseHandler<Window>() {
 
@@ -125,7 +126,7 @@ public class IEOrientationHandler implements OrientationHandler {
   
   public void doSetupOrientation() {
 
-    if (!orientationSupported()) {
+    if (!orientationSupported) {
       Window.addResizeHandler(new ResizeHandler() {
 
         @Override
@@ -149,7 +150,7 @@ public class IEOrientationHandler implements OrientationHandler {
    * @return the current orientation of the device
    */
   public ORIENTATION getOrientation() {
-    if (!orientationSupported()) {
+    if (!orientationSupported) {
       int height = Window.getClientHeight();
       int width = Window.getClientWidth();
 
@@ -163,7 +164,7 @@ public class IEOrientationHandler implements OrientationHandler {
     }
   }
 
-  private static native boolean orientationSupported() /*-{
+  private static native boolean isOrientationSupported() /*-{
     return "msOrientation" in $wnd.screen;
   }-*/;
 
