@@ -155,7 +155,8 @@ public class MGWT {
     if (TouchSupport.isTouchEventsEmulatedUsingPointerEvents())
     {
       MetaElement ieCompatible = Document.get().createMetaElement();
-      ieCompatible.setHttpEquiv("IE=10");
+      ieCompatible.setHttpEquiv("x-ua-compatible");
+      ieCompatible.setContent("IE=10");
       head.appendChild(ieCompatible);
       
       MetaElement tapHighlight = Document.get().createMetaElement();
