@@ -5,10 +5,9 @@ import com.google.gwt.dom.client.Element;
 
 /**
  * No idea why but there is a slight difference between Windows Phone 8.1 and
- * Windows Phone 8.1 Update. To force getComputedStyle to return a 3D matrix for
- * the transform property the translate3d function needs a non-zero z value.
- * Windows Phone 8.1 works if you specify 0 but Windows Phone 8.1 Update does not, it returns
- * a 2D matrix. So we force a 3D matrix to be returned by specifying a z value of -1px
+ * Windows Phone 8.1 Update. When using translate3d with z=0 getComputedStyle returns
+ * a 3D matrix on Windows Phone 8.1 but for Windows Phone 8.1 Update it returns
+ * a 2D matrix. So we check which matrix is returned before using the relevant elements
  */
 public class CssUtilIE10Impl implements CssUtilImpl {
 
@@ -17,7 +16,7 @@ public class CssUtilIE10Impl implements CssUtilImpl {
 
   @Override
   public void translate(Element el, int x, int y) {
-    String cssText = "translate3d(" + x + "px, " + y + "px, -1px)";
+    String cssText = "translate3d(" + x + "px," + y + "px,0px)";
     _translate(el, cssText);
   }
 
@@ -74,9 +73,16 @@ public class CssUtilIE10Impl implements CssUtilImpl {
   private native JsArrayInteger getPositionFromTransform(Element el)/*-{
     var matrix = getComputedStyle(el, null)['transform'].replace(
         /[^0-9-.,]/g, '').split(',');
-    var x = matrix[12] * 1;
-    var y = matrix[13] * 1;
-    return [ x, y ];
+    if (matrix.length === 6) {
+      var x = matrix[4] * 1;
+      var y = matrix[5] * 1;
+      return [ x, y ];
+    }
+    else {
+      var x = matrix[12] * 1;
+      var y = matrix[13] * 1;
+      return [ x, y ];
+    }
   }-*/;
 
   @Override
@@ -111,13 +117,13 @@ public class CssUtilIE10Impl implements CssUtilImpl {
 
   @Override
   public void setTranslateAndZoom(Element el, int x, int y, double scale) {
-    String cssText = "translate3d(" + x + "px, " + y + "px, -1px) scale(" + scale + ")";
+    String cssText = "translate3d(" + x + "px, " + y + "px,0px) scale(" + scale + ")";
     el.getStyle().setProperty("transform", cssText);
   }
 
   @Override
   public void translatePercent(Element el, double x, double y) {
-    String cssText = "translate3d(" + x + "%, " + y + "%, -1px)";
+    String cssText = "translate3d(" + x + "%, " + y + "%,0%)";
     _translate(el, cssText);
   }
 
