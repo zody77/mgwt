@@ -45,30 +45,36 @@ public class IOS71BodyBug {
     TextResource css();
   }
 
+  /**
+   * Only apply fix if ios71
+   */
   public static void applyWorkaround() {
-    // iOS bug fix needs only be applied in portrait orientation.
-    // Fix is deferred until the orientation change event is fired.
-    if (MGWT.getOrientation() == ORIENTATION.PORTRAIT) {
-      registerOrientationChangeEvent();
-      return;
+    if (isIOS71() && (MGWT.getOsDetection().isIPad() || MGWT.getOsDetection().isIPadRetina())) {
+      // iOS bug fix needs only be applied in portrait orientation.
+      // Fix is deferred until the orientation change event is fired.
+      if (MGWT.getOrientation() == ORIENTATION.PORTRAIT) {
+        registerOrientationChangeEvent();
+        return;
+      }
+      applyFix();
     }
+  }
 
-    if (MGWT.getOsDetection().isIPad() || MGWT.getOsDetection().isIPadRetina()) {
-      if (isIOS71() && windowInnerHeight() == 672) {
+  private static void applyFix() {
+      if (windowInnerHeight() == 672) {
         String text = Resources.INSTANCE.css().getText();
         StyleInjector.inject(text);
         Document.get().getBody().addClassName("__fixIOS7BodyBug");
       }
-    }
   }
-
   private static void registerOrientationChangeEvent() {
     orientationChangeHandler = MGWT.addOrientationChangeHandler(new OrientationChangeHandler() {
 
       @Override
       public void onOrientationChanged(OrientationChangeEvent event) {
+        orientationChangeHandler.removeHandler();
         orientationChangeHandler = null;
-        applyWorkaround();
+        applyFix();
       }
     });
   }
