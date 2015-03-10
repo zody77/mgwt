@@ -44,6 +44,8 @@ public class TapRecognizer implements TouchHandler {
 
 	private boolean hasMoved;
 
+	private Touch touch;
+
 	private int start_x;
 
 	private int start_y;
@@ -78,9 +80,9 @@ public class TapRecognizer implements TouchHandler {
 		}else {
 			targetElement = null;
 		}
-
-		start_x = event.getTouches().get(0).getPageX();
-		start_y = event.getTouches().get(0).getPageY();
+		touch = event.getTouches().get(0);
+		start_x = touch.getPageX();
+		start_y = touch.getPageY();
 	}
 
 	@Override
@@ -94,7 +96,7 @@ public class TapRecognizer implements TouchHandler {
 	@Override
 	public void onTouchEnd(TouchEndEvent event) {
 		if (!hasMoved && !touchCanceled) {
-			TapEvent tapEvent = new TapEvent(source, targetElement, start_x, start_y);
+			TapEvent tapEvent = new TapEvent(source, targetElement, touch);
 			getEventPropagator().fireEvent(source, tapEvent);
 		}
 	}

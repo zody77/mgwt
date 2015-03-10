@@ -33,7 +33,6 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.RootPanel;
-
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeEvent;
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeEvent.ORIENTATION;
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeHandler;
@@ -315,13 +314,15 @@ public class MGWT {
   }
 
   private static native void setupPreventScrolling(Element el)/*-{
-		var func = function(event) {
-			event.preventDefault();
-			return false;
-		};
-
-		el.ontouchmove = func;
-
+    var func = function(event) {
+      var tagName = event.target.tagName;
+      if ((tagName == 'INPUT') || (tagName == 'SELECT') || (tagName == 'TEXTAREA'))  {
+        return true;
+      }
+      event.preventDefault();
+      return false;
+    };
+    el.ontouchmove = func;
   }-*/;
 
   private static void setupPreventScrollingIE10(Element el) {

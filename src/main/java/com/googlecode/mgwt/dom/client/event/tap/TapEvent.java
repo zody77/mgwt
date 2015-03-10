@@ -16,6 +16,7 @@
 package com.googlecode.mgwt.dom.client.event.tap;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Touch;
 import com.google.gwt.event.shared.GwtEvent;
 
 /**
@@ -28,16 +29,14 @@ import com.google.gwt.event.shared.GwtEvent;
 public class TapEvent extends GwtEvent<TapHandler> {
 
 	private static final Type<TapHandler> TYPE = new Type<TapHandler>();
-	private final int startX;
-	private final int startY;
+	private final Touch touch;
 	private final Element targetElement;
 
-	public TapEvent(Object source, Element targetElement, int startX, int startY) {
-	  this.targetElement = targetElement;
-    this.startX = startX;
-    this.startY = startY;
-    setSource(source);
-  }
+	 public TapEvent(Object source, Element targetElement, Touch touch) {
+	    this.targetElement = targetElement;
+	    this.touch = touch;
+	    setSource(source);
+	  }
 
 	@Override
 	public com.google.gwt.event.shared.GwtEvent.Type<TapHandler> getAssociatedType() {
@@ -54,15 +53,23 @@ public class TapEvent extends GwtEvent<TapHandler> {
 		return TYPE;
 	}
 
-	public int getStartX() {
-		return startX;
-	}
-
-	public int getStartY() {
-		return startY;
-	}
-
 	/**
+	 * Get access to other useful position information related to the tap event
+	 * @return
+	 */
+	public Touch getTouch() {
+		return touch;
+	}
+
+  public int getStartX() {
+    return touch.getPageX();
+  }
+
+  public int getStartY() {
+    return touch.getPageY();
+  }
+
+  /**
 	 * Returns the element that was the actual target of the Tap event.
 	 */
 	public Element getTargetElement() {
