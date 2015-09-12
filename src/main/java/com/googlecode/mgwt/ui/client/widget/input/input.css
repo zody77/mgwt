@@ -24,6 +24,9 @@
     -moz-box-flex: 1;
     -moz-appearance: none;
     -moz-user-select: text;
+
+	display: -ms-flexbox;
+	-ms-user-select: text;
   }
 }
 

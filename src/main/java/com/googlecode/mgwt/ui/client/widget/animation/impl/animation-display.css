@@ -4,6 +4,8 @@
   height: 100%;
   overflow:hidden;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
 }
 
 .display {
@@ -14,7 +16,18 @@
   bottom: 0px;
   overflow:hidden;
   -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+
   -webkit-transform: translate3d(0,0,0) rotate(0) scale(1);
+  -moz-transform: translate3d(0,0,0) rotate(0) scale(1);
+  -ms-transform: translate3d(0,0,0) rotate(0) scale(1);
+
   -webkit-perspective: 800;
+  -moz-perspective: 800;
+  -ms-perspective: 800;
 }

@@ -2,6 +2,12 @@
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-duration: 300ms;
   -webkit-animation-fill-mode: both;
+  -moz-animation-timing-function: ease-in-out;
+  -moz-animation-duration: 300ms;
+  -moz-animation-fill-mode: both;
+  -ms-animation-timing-function: ease-in-out;
+  -ms-animation-duration: 300ms;
+  -ms-animation-fill-mode: both;
 }
 
 .in {
@@ -14,18 +20,26 @@
 
 .in {
   -webkit-animation-name: slideinfromright;
+  -moz-animation-name: slideinfromright;
+  -ms-animation-name: slideinfromright;
 }
 
 .out {
   -webkit-animation-name: slideouttoleft;
+  -moz-animation-name: slideouttoleft;
+  -ms-animation-name: slideouttoleft;
 }
 
 .in.reverse {
   -webkit-animation-name: slideinfromleft;
+  -moz-animation-name: slideinfromleft;
+  -ms-animation-name: slideinfromleft;
 }
 
 .out.reverse {
   -webkit-animation-name: slideouttoright;
+  -moz-animation-name: slideouttoright;
+  -ms-animation-name: slideouttoright;
 }
 
 @-webkit-keyframes slideinfromright {
@@ -46,4 +60,44 @@
 @-webkit-keyframes slideouttoright {
   from { -webkit-transform: translateX(0); }
   to { -webkit-transform: translateX(100%); }
+}
+
+@-moz-keyframes slideinfromright {
+  from { -moz-transform: translateX(100%); }
+  to { -moz-transform: translateX(0); }
+}
+
+@-moz-keyframes slideinfromleft {
+  from { -moz-transform: translateX(-100%); }
+  to { -moz-transform: translateX(0); }
+}
+
+@-moz-keyframes slideouttoleft {
+  from { -moz-transform: translateX(0); }
+  to { -moz-transform: translateX(-100%); }
+}
+
+@-moz-keyframes slideouttoright {
+  from { -moz-transform: translateX(0); }
+  to { -moz-transform: translateX(100%); }
+}
+
+@-ms-keyframes slideinfromright {
+  from { -ms-transform: translateX(100%); }
+  to { -ms-transform: translateX(0); }
+}
+
+@-ms-keyframes slideinfromleft {
+  from { -ms-transform: translateX(-100%); }
+  to { -ms-transform: translateX(0); }
+}
+
+@-ms-keyframes slideouttoleft {
+  from { -ms-transform: translateX(0); }
+  to { -ms-transform: translateX(-100%); }
+}
+
+@-ms-keyframes slideouttoright {
+  from { -ms-transform: translateX(0); }
+  to { -ms-transform: translateX(100%); }
 }

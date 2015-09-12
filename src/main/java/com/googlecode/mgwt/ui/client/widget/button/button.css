@@ -8,12 +8,12 @@
   color: #454545;
   display: inline-block;
   position: relative;
-  padding: 10px;
+  padding: 0.2em;
   margin: 5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 16px;
+  font-size: 1em;
   background-color: #e5e9e8;
   border: 1px solid #9daca9;
   border-radius: 6px;

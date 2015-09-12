@@ -2,22 +2,36 @@
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-duration: 300ms;
   -webkit-animation-fill-mode: both;
+  -moz-animation-timing-function: ease-in-out;
+  -moz-animation-duration: 300ms;
+  -moz-animation-fill-mode: both;
+  -ms-animation-timing-function: ease-in-out;
+  -ms-animation-duration: 300ms;
+  -ms-animation-fill-mode: both;
 }
 
 .in {
   -webkit-animation-name: popin;
+  -moz-animation-name: popin;
+  -ms-animation-name: popin;
 }
 
 .out {
   -webkit-animation-name: popout;
+  -moz-animation-name: popout;
+  -ms-animation-name: popout;
 }
 
 .in.reverse {
   -webkit-animation-name: popin;
+  -moz-animation-name: popin;
+  -ms-animation-name: popin;
 }
 
 .out.reverse {
   -webkit-animation-name: popout;
+  -moz-animation-name: popout;
+  -ms-animation-name: popout;
 }
 
 @-webkit-keyframes popin {
@@ -38,6 +52,50 @@
   }
   to {
     -webkit-transform: scale(.3);
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes popin {
+  from {
+    -moz-transform: scale(.3);
+    opacity: 0;
+  }
+  to {
+    -moz-transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes popout {
+  from {
+    -moz-transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    -moz-transform: scale(.3);
+    opacity: 0;
+  }
+}
+
+@-ms-keyframes popin {
+  from {
+    -ms-transform: scale(.3);
+    opacity: 0;
+  }
+  to {
+    -ms-transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes popout {
+  from {
+    -ms-transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    -ms-transform: scale(.3);
     opacity: 0;
   }
 }

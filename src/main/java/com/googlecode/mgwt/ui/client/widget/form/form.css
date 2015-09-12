@@ -31,6 +31,7 @@
   .mgwt-Form-Entry {
     width: 100%;
     -moz-justify-content: center;
+    -ms-justify-content: center;
     display: -moz-box;
     display: -ms-flexbox; /* IE is in FF permutation */
   }
@@ -61,6 +62,7 @@
   .mgwt-Form-Entry-label {
     width: 30%;
     display: -moz-box;
+    display: -ms-flexbox;
   }
 }
 
@@ -86,6 +88,7 @@
     -moz-box-flex: 1;
     -moz-box-pack: end;
     display: -moz-box;
+    display: -ms-flexbox;
   }
 }
 

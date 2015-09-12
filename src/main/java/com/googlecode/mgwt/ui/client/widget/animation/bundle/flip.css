@@ -4,22 +4,40 @@
   -webkit-animation-fill-mode: both;	
   -webkit-animation-duration: .65s;
   -webkit-backface-visibility: hidden;
+  -moz-animation-timing-function: ease-in-out;
+  -moz-animation-duration: 300ms;
+  -moz-animation-fill-mode: both;	
+  -moz-animation-duration: .65s;
+  -moz-backface-visibility: hidden;
+  -ms-animation-timing-function: ease-in-out;
+  -ms-animation-duration: 300ms;
+  -ms-animation-fill-mode: both;	
+  -ms-animation-duration: .65s;
+  -ms-backface-visibility: hidden;
 }
 
 .in {
   -webkit-animation-name: flipinfromleft;
+  -moz-animation-name: flipinfromleft;
+  -ms-animation-name: flipinfromleft;
 }
 
 .out {
   -webkit-animation-name: flipouttoleft;
+  -moz-animation-name: flipouttoleft;
+  -ms-animation-name: flipouttoleft;
 }
 
 .in.reverse {
   -webkit-animation-name: flipinfromright;
+  -moz-animation-name: flipinfromright;
+  -ms-animation-name: flipinfromright;
 }
 
 .out.reverse {
   -webkit-animation-name: flipouttoright;
+  -moz-animation-name: flipouttoright;
+  -ms-animation-name: flipouttoright;
 }
 
 @-webkit-keyframes flipinfromright {
@@ -40,4 +58,44 @@
 @-webkit-keyframes flipouttoright {
   from { -webkit-transform: rotateY(0) scale(1); }
   to { -webkit-transform: rotateY(180deg) scale(.8); }
+}
+
+@-moz-keyframes flipinfromright {
+  from { -moz-transform: rotateY(-180deg) scale(.8); }
+  to { -moz-transform: rotateY(0) scale(1); }
+}
+
+@-moz-keyframes flipinfromleft {
+  from { -moz-transform: rotateY(180deg) scale(.8); }
+  to { -moz-transform: rotateY(0) scale(1); }
+}
+
+@-moz-keyframes flipouttoleft {
+  from { -moz-transform: rotateY(0) scale(1); }
+  to { -moz-transform: rotateY(-180deg) scale(.8); }
+}
+
+@-moz-keyframes flipouttoright {
+  from { -moz-transform: rotateY(0) scale(1); }
+  to { -moz-transform: rotateY(180deg) scale(.8); }
+}
+
+@-ms-keyframes flipinfromright {
+  from { -ms-transform: rotateY(-180deg) scale(.8); }
+  to { -ms-transform: rotateY(0) scale(1); }
+}
+
+@-ms-keyframes flipinfromleft {
+  from { -ms-transform: rotateY(180deg) scale(.8); }
+  to { -ms-transform: rotateY(0) scale(1); }
+}
+
+@-ms-keyframes flipouttoleft {
+  from { -ms-transform: rotateY(0) scale(1); }
+  to { -ms-transform: rotateY(-180deg) scale(.8); }
+}
+
+@-ms-keyframes flipouttoright {
+  from { -ms-transform: rotateY(0) scale(1); }
+  to { -ms-transform: rotateY(180deg) scale(.8); }
 }

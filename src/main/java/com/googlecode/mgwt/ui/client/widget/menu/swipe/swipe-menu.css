@@ -43,9 +43,11 @@
 @if user.agent gecko1_8 {
   .opened {
     -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
   }
   .closed {
     -moz-transform: translate3d(-40%, 0, 0);
+    -ms-transform: translate3d(-40%, 0, 0);
   }
 }
 

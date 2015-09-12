@@ -42,6 +42,9 @@
   display: flex;
   -webkit-box-pack: center; /* iOS < 7 && Android < 4.4*/
   -webkit-justify-content: center;
+  -moz-box-pack: center; /* iOS < 7 && Android < 4.4*/
   -moz-justify-content: center;
+  -ms-box-pack: center; /* iOS < 7 && Android < 4.4*/
+  -ms-justify-content: center;
   justify-content: center;
 }

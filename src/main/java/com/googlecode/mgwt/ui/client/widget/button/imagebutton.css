@@ -17,6 +17,7 @@
 @if user.agent gecko1_8 {
   .mgwt-ImageButton {
     display: -moz-box;
+    display: -ms-flexbox;
   }
 }
 
@@ -32,13 +33,21 @@
   max-width: 130px;
   overflow: hidden;
   background-color: #e5e9e8;
-  box-shadow: inset 0 1px #fff;
   border: 1px solid #9daca9;
   border-radius: 6px;
+  box-shadow: inset 0 1px #fff;
+  -moz-box-shadow: inset 0 1px #fff;
+  -ms-box-shadow: inset 0 1px #fff;
+  -o-box-shadow: inset 0 1px #fff;
+  -webkit-box-shadow: inset 0 1px #fff;
 }
 
 .mgwt-ImageButton-active {
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.36);
+  -moz-box-shadow: inset 0 1px rgba(255, 255, 255, 0.36);
+  -ms-box-shadow: inset 0 1px rgba(255, 255, 255, 0.36);
+  -o-box-shadow: inset 0 1px rgba(255, 255, 255, 0.36);
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.36);
 }
 
 .mgwt-ImageButton-disabled {
@@ -46,7 +55,7 @@
 }
 
 .mgwt-ImageButton-image {
-  z-index: 1;
+  /*z-index: 1;*/
   display: inline-block;
   background-repeat: no-repeat;
   height: 32px;
@@ -72,6 +81,10 @@
 }
 
 .mgwt-ImageButton.mgwt-ImageButton-small {
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  -o-box-shadow: none;
+  -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
   border-radius: 0px;
@@ -80,8 +93,12 @@
 }
 
 .mgwt-ImageButton.mgwt-ImageButton-small.mgwt-ImageButton-active {
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  -o-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
   color: #eff1f1;
   border: none;
-  box-shadow: none;
   outline: 0;
 }

@@ -34,9 +34,11 @@
     display: -moz-box;
     -moz-box-orient: horizontal;
     -moz-box-flex: 1;
+    -ms-box-orient: horizontal;
   }
   .mgwt-RadioButton-label {
     display: -moz-box;
+    display: -ms-flexbox;
     -moz-box-flex: 1;
   }
 }
@@ -86,8 +88,10 @@
 @if user.agent gecko1_8 {
   .mgwt-RadioButton-input {
     -moz-appearance: none !important;
+    -ms-appearance: none !important;
   }
   .mgwt-RadioButton-input:CHECKED {
     -moz-appearance: none !important;
+    -ms-appearance: none !important;
   }
 }

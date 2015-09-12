@@ -34,6 +34,11 @@
     -moz-animation-name: anmiateProgressBar;
     -moz-animation-iteration-count: infinite;
     -moz-animation-timing-function: linear;
+
+    animation-duration: 9s;
+    animation-name: anmiateProgressBar;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
   }
 
   @-moz-keyframes anmiateProgressBar {

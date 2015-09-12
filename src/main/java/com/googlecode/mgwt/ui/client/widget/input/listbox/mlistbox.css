@@ -21,6 +21,9 @@
     display: -moz-box;
     -moz-appearance: none;
     -moz-user-select: text;
+    display: -ms-flexbox;
+    -ms-appearance: none;
+    -ms-user-select: text;
   }
 }
 

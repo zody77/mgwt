@@ -45,6 +45,8 @@
   .mgwt-CheckBox-middle {
     -moz-transition: all 0.1s ease-in-out;
     -moz-border-radius: 6px;
+    -ms-transition: all 0.1s ease-in-out;
+    -ms-border-radius: 6px;
   }
 }
 
@@ -66,6 +68,7 @@
 @if user.agent gecko1_8 {
   .mgwt-CheckBox-middle-content {
     -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
   }
 }
 
@@ -88,6 +91,7 @@
 @if user.agent gecko1_8 {
   .mgwt-CheckBox-on {
     -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
   }
 }
 
@@ -111,6 +115,7 @@
 @if user.agent gecko1_8 {
   .mgwt-CheckBox-off {
     -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
   }
 }
 
@@ -145,31 +150,26 @@
   }
   .mgwt-CheckBox-notchecked .mgwt-CheckBox-middle {
     -moz-transform: translate(-54px,0);
+    -ms-transform: translate(-54px,0);
   }
   .mgwt-CheckBox-checked .mgwt-CheckBox-middle {
     -moz-transform: translate(0px,0);
+    -ms-transform: translate(0px,0);
   }
   .mgwt-CheckBox-notchecked .mgwt-CheckBox-off {
     -moz-transform: translate(-54px,0);
+    -ms-transform: translate(-54px,0);
   }
   .mgwt-CheckBox-checked .mgwt-CheckBox-off {
     -moz-transform: translate(0px,0);
+    -ms-transform: translate(0px,0);
   }
   .mgwt-CheckBox-notchecked .mgwt-CheckBox-on {
     -moz-transform: translate(-62px,0);
+    -ms-transform: translate(-62px,0);
   }
   .mgwt-CheckBox-checked .mgwt-CheckBox-on {
     -moz-transform: translate(0px,0);
+    -ms-transform: translate(0px,0);
   }
-}
-
-/*TODO add browser....*/
-@if user.agent ie8 ie9 ie10 {
-  .mgwt-CheckBox-important .mgwt-CheckBox-on {}
-  .mgwt-CheckBox-notchecked .mgwt-CheckBox-middle {}
-  .mgwt-CheckBox-checked .mgwt-CheckBox-middle {}
-  .mgwt-CheckBox-notchecked .mgwt-CheckBox-off {}
-  .mgwt-CheckBox-checked .mgwt-CheckBox-off {}
-  .mgwt-CheckBox-notchecked .mgwt-CheckBox-on {}
-  .mgwt-CheckBox-checked .mgwt-CheckBox-on {}
 }

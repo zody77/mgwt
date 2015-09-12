@@ -23,6 +23,8 @@
   .mgwt-ButtonBar {
     display: -moz-box;
     -moz-box-orient: horizontal;
+    display: -ms-flexbox;
+    -ms-box-orient: horizontal;
   }
 }
 

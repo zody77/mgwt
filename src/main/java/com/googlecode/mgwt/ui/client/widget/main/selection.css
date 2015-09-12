@@ -11,6 +11,7 @@
 @if user.agent gecko1_8 {
   .userSelectNone {
     -moz-user-select: none;
+    -ms-user-select: none;
   }
 }
 
@@ -29,6 +30,7 @@
 @if user.agent gecko1_8 {
   .userSelectText {
     -moz-user-select: text;
+    -ms-user-select: text;
   }
 }
 
@@ -47,6 +49,7 @@
 @if user.agent gecko1_8 {
   .userSelectAll {
     -moz-user-select: all;
+    -ms-user-select: all;
   }
 }
 
@@ -65,6 +68,7 @@
 @if user.agent gecko1_8 {
   .userSelectElement {
     -moz-user-select: element;
+    -ms-user-select: element;
   }
 }
 
