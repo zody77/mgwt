@@ -31,3 +31,29 @@
   -moz-perspective: 800;
   -ms-perspective: 800;
 }
+
+
+@if user.agent safari {
+	.displayContainer {
+  		-webkit-backface-visibility: hidden;
+	}
+	
+	.display {
+	  -webkit-transform-style: preserve-3d;
+	  -webkit-backface-visibility: hidden;
+	  -webkit-transform: translate3d(0,0,0) rotate(0) scale(1);
+	  -webkit-perspective: 800;
+	}
+}
+
+@if user.agent ie10 {
+	.displayContainer {
+	  backface-visibility: hidden;
+	}
+	
+	.display {
+	  backface-visibility: hidden;
+	  transform: translate3d(0,0,0) rotate(0) scale(1);
+	  perspective: 800;
+	}
+}

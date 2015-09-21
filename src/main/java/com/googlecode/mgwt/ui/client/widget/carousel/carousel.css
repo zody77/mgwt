@@ -15,10 +15,17 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-Carousel {
+    display: -ms-flexbox;
+    -ms-flex: 1 1;
+  }
+}
+
 .mgwt-Carousel {
   position: relative;
   flex:1;
-  flex-flow: column;
+  flex-direction: column;
   overflow: visible;
   display: -moz-flexbox;
   display: -ms-flexbox;
@@ -30,6 +37,12 @@
   .mgwt-Carousel-Scroller, .mgwt-Carousel-Container  {
     -webkit-box-flex: 1; /* iOS < 7 && Android < 4.4*/
     -webkit-flex: 1;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-Carousel-Scroller, .mgwt-Carousel-Container  {
+    -ms-flex: 1 1;
   }
 }
 

@@ -15,157 +15,106 @@
  */
 package com.googlecode.mgwt.ui.client.widget.panel.flex;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 
-public final class FlexPropertyHelper {
+public abstract class FlexPropertyHelper {
 
+  private static final FlexPropertyHelper impl = GWT.create(FlexPropertyHelper.class);
+  
   public static enum Alignment {
-    START("flex-start"), END("flex-end"), CENTER("center"), STRETCH("stretch"), BASELINE("baseline");
+    START, END, CENTER, STRETCH, BASELINE, NONE;
+  }
 
-    private final String cssValue;
-
-    private Alignment(String cssValue) {
-      this.cssValue = cssValue;
-    }
-
-    private static String getCssProperty() {
-      return "AlignItems";
-    }
-
-    private String getCssValue() {
-      return cssValue;
-    }
+  public static enum AlignmentSelf {
+    START, END, CENTER, STRETCH, BASELINE, AUTO;
   }
 
   public static enum Justification {
-    START("flex-start"), END("flex-end"), CENTER("center"), SPACE_BETWEEN("space-between");
-
-    private final String cssValue;
-
-    private Justification(String cssValue) {
-      this.cssValue = cssValue;
-    }
-
-    private static String getCssProperty() {
-      return "JustifyContent";
-    }
-
-    private String getCssValue() {
-      return cssValue;
-    }
+    START, END, CENTER, SPACE_BETWEEN, SPACE_AROUND, NONE;
   }
-
+  
   public static enum Orientation {
-    HORIZONTAL("row"), VERTICAL("column");
+    HORIZONTAL, HORIZONTAL_REVERSE, VERTICAL, VERTICAL_REVERSE;
+  }
 
-    private final String cssValue;
+  public static enum FlexWrap {
+    NOWRAP, WRAP, WRAP_REVERSE;
+  }
 
-    private Orientation(String cssValue) {
-      this.cssValue = cssValue;
+  public static void setElementAsFlexContainer(Element el)
+  {
+    setElementAsFlexContainer(el, null);
+  }
+  
+  public static void setElementAsFlexContainer(Element el, Orientation orientation)
+  {
+    if (orientation == null)
+    {
+      orientation = Orientation.HORIZONTAL; // the default
     }
-
-    private static String getCssProperty() {
-      return "Direction";
-    }
-
-    private String getCssValue() {
-      return cssValue;
-    }
+    impl._setElementAsFlexContainer(el, orientation);
   }
 
-  public static void setFlex(Element el, double flex) {
-    /* iOS < 7 && Android < 4.4*/
-    el.getStyle().setProperty("WebkitBoxFlex", Double.toString(flex));
-
-    el.getStyle().setProperty("MozFlex", Double.toString(flex));
-    el.getStyle().setProperty("WebkitFlex", Double.toString(flex));
-    el.getStyle().setProperty("flex", Double.toString(flex));
+  public static void setFlex(Element el, double grow) {
+    setFlex(el, grow, "0%");
   }
 
-  private static void setFlexProperty(Element el, String name, String value) {
-    setStyleProperty(el, "MozFlex" + name, value);
-    setStyleProperty(el, "webkitFlex" + name, value);
-    setStyleProperty(el, "flex" + name, value);
+  public static void setFlex(Element el, double grow, double shrink) {
+    setFlex(el, grow, shrink, "0%");
   }
 
-  private static void setProperty(Element el, String name, String value) {
-    setStyleProperty(el, "Moz" + name, value);
-    setStyleProperty(el, "webkit" + name, value);
-    setStyleProperty(el, name, value);
+  public static void setFlex(Element el, double grow, double shrink, String basis) {
+    impl._setFlex(el, grow, shrink, basis);
   }
 
-  public static void setOrientation(Element el, Orientation value) {
-    // iOS6 & Android < 4.4
-    switch (value) {
-      case HORIZONTAL:
-        el.getStyle().setProperty("WebkitBoxOrient", "horizontal");
-        break;
-      case VERTICAL:
-        el.getStyle().setProperty("WebkitBoxOrient", "vertical");
-        break;
-      default:
-        throw new RuntimeException();
-    }
-    setFlexProperty(el, Orientation.getCssProperty(), value.getCssValue());
+  public static void setFlex(Element el, double grow, String basis) {
+    impl._setFlex(el, grow, basis);
   }
 
-  public static void setAlignment(Element el, Alignment value) {
-    // iOS6 & Android < 4.4
-    switch (value) {
-      case START:
-        el.getStyle().setProperty("WebkitBoxAlign", "start");
-        break;
-      case CENTER:
-        el.getStyle().setProperty("WebkitBoxAlign", "center");
-        break;
-      case END:
-        el.getStyle().setProperty("WebkitBoxAlign", "end");
-        break;
-      case BASELINE:
-        el.getStyle().setProperty("WebkitBoxAlign", "baseline");
-        break;
-      case STRETCH:
-        el.getStyle().setProperty("WebkitBoxAlign", "stretch");
-        break;
-      default:
-        throw new RuntimeException();
-    }
-    setProperty(el, Alignment.getCssProperty(), value.getCssValue());
+  public static void setFlexOrder(Element el, int order) {
+    impl._setFlexOrder(el, order);
   }
 
-  public static void setJustification(Element el, Justification value) {
-    // iOS6 & Android < 4.4
-    switch (value) {
-      case START:
-        el.getStyle().setProperty("WebkitBoxPack", "start");
-        break;
-      case CENTER:
-        el.getStyle().setProperty("WebkitBoxPack", "center");
-        break;
-      case END:
-        el.getStyle().setProperty("WebkitBoxPack", "end");
-        break;
-      case SPACE_BETWEEN:
-        el.getStyle().setProperty("WebkitBoxPack", "justify");
-        break;
-      default:
-        throw new RuntimeException();
-    }
-    setProperty(el, Justification.getCssProperty(), value.getCssValue());
+  public static void setAlignment(Element el, Alignment alignment) {
+    impl._setAlignmentProperty(el, alignment);
   }
 
-  private static void setStyleProperty(Element el, String property, String value) {
+  public static void setAlignmentSelf(Element el, AlignmentSelf alignmentSelf) {
+    impl._setAlignmentSelfProperty(el, alignmentSelf);
+  }
+
+  public static void setOrientation(Element el, Orientation orientation) {
+    impl._setOrientationProperty(el, orientation);
+  }
+
+  public static void setJustification(Element el, Justification justification) {
+    impl._setJustificationProperty(el, justification);
+  }
+
+  public static void setFlexWrap(Element el, FlexWrap flexWrap) {
+    impl._setFlexWrapProperty(el, flexWrap);
+  }
+
+  public static void clearAlignment(Element el) {
+    impl._setAlignmentProperty(el,Alignment.NONE);
+  }
+
+  public static void clearJustification(Element el) {
+    impl._setJustificationProperty(el,Justification.NONE);
+  }
+  
+  protected void setStyleProperty(Element el, String property, String value) {
     el.getStyle().setProperty(property, value);
   }
 
-  private FlexPropertyHelper() {
-  }
-
-  public static void clearAlignment(Element element) {
-    setProperty(element, Alignment.getCssProperty(), "");
-  }
-
-  public static void clearJustification(Element element) {
-    setProperty(element, Justification.getCssProperty(), "");
-  }
+  protected abstract void _setElementAsFlexContainer(Element el, Orientation orientation);
+  protected abstract void _setFlex(Element el, double grow, String basis);
+  protected abstract void _setFlex(Element el, double grow, double shrink, String basis);
+  protected abstract void _setFlexOrder(Element el, int order);
+  protected abstract void _setAlignmentProperty(Element el, Alignment alignment);
+  protected abstract void _setAlignmentSelfProperty(Element el, AlignmentSelf alignmentSelf);
+  protected abstract void _setOrientationProperty(Element el, Orientation orientation);
+  protected abstract void _setJustificationProperty(Element el, Justification justification);
+  protected abstract void _setFlexWrapProperty(Element el, FlexWrap flexWrap);
 }

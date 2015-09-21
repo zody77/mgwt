@@ -19,8 +19,8 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.resources.client.ImageResource;
-
 import com.googlecode.mgwt.image.client.ImageConverter;
+import com.googlecode.mgwt.image.client.ImageConverterCallback;
 import com.googlecode.mgwt.ui.client.MGWT;
 
 public class IconHandler {
@@ -86,20 +86,30 @@ public class IconHandler {
     private static final ImageConverter converter = new ImageConverter();
 
     @Override
-    public void setIcons(Element element, ImageResource icon, String color) {
+    public void setIcons(final Element element, ImageResource icon, String color) {
       if (icon == null) {
         return;
       }
 
-      element.getStyle().setBackgroundColor("transparent");
-      ImageResource convertImageResource = converter.convert(icon, color);
-      Dimension dimensions = calculateDimensions(convertImageResource);
-      element.getStyle().setWidth(dimensions.width, Unit.PX);
-      element.getStyle().setHeight(dimensions.height, Unit.PX);
-      element.getStyle().setBackgroundImage(
-          "url(" + convertImageResource.getSafeUri().asString() + ")");
-      element.getStyle().setProperty("backgroundSize",
-          dimensions.width + "px " + dimensions.height + "px");
+      converter.convert(icon, color, new ImageConverterCallback() {
+
+        @Override
+        public void onFailure(Throwable caught) {
+        }
+
+        @Override
+        public void onSuccess(ImageResource convertImageResource) {
+          element.getStyle().setBackgroundColor("transparent");
+          Dimension dimensions = calculateDimensions(convertImageResource);
+          element.getStyle().setWidth(dimensions.width, Unit.PX);
+          element.getStyle().setHeight(dimensions.height, Unit.PX);
+          element.getStyle().setBackgroundImage(
+              "url(" + convertImageResource.getSafeUri().asString() + ")");
+          element.getStyle().setProperty("backgroundSize",
+              dimensions.width + "px " + dimensions.height + "px");
+        }
+        
+      });
     }
   }
 

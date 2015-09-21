@@ -22,8 +22,6 @@ import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
-
-import com.googlecode.mgwt.dom.client.event.mouse.HandlerRegistrationCollection;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
@@ -83,13 +81,14 @@ public abstract class TouchWidget extends Widget implements HasTouchHandlers, Ha
 
 	@Override
 	public HandlerRegistration addTouchHandler(TouchHandler handler) {
-		HandlerRegistrationCollection handlerRegistrationCollection = new HandlerRegistrationCollection();
-
-		handlerRegistrationCollection.addHandlerRegistration(addTouchCancelHandler(handler));
-		handlerRegistrationCollection.addHandlerRegistration(addTouchStartHandler(handler));
-		handlerRegistrationCollection.addHandlerRegistration(addTouchEndHandler(handler));
-		handlerRegistrationCollection.addHandlerRegistration(addTouchMoveHandler(handler));
-		return handlerRegistrationCollection;
+	    return impl.addTouchHandler(this, handler);
+//		HandlerRegistrationCollection handlerRegistrationCollection = new HandlerRegistrationCollection();
+//
+//		handlerRegistrationCollection.addHandlerRegistration(addTouchCancelHandler(handler));
+//		handlerRegistrationCollection.addHandlerRegistration(addTouchStartHandler(handler));
+//		handlerRegistrationCollection.addHandlerRegistration(addTouchEndHandler(handler));
+//		handlerRegistrationCollection.addHandlerRegistration(addTouchMoveHandler(handler));
+//		return handlerRegistrationCollection;
 	}
 
   @Override

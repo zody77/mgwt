@@ -12,22 +12,37 @@
 
 @if user.agent safari {
   .mgwt-TabBar-Button {
+    display: -webkit-box; /* iOS < 7 && Android < 4.4*/
+    display: -webkit-flex;
+    -webkit-box-orient: vertical; /* iOS < 7 && Android < 4.4*/
+    -webkit-flex-direction: column;
+    -webkit-box-flex: 1; /* iOS < 7 && Android < 4.4*/
+    -webkit-flex: 1;
     -webkit-appearance: none;
-    -webkit-box-flex: 1;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-TabBar-Button {
+    display: -ms-flexbox;
+	-ms-flex-direction: column;
+    -ms-flex: 1 1;
   }
 }
 
 @if user.agent gecko1_8 {
   .mgwt-TabBar-Button {
-    -moz-appearance: none;
+    display: -moz-box;
+	-moz-flex-direction: column;
     -moz-box-flex: 1;
+    -moz-appearance: none;
   }
 }
 
 .mgwt-TabBar-Button {
   display: flex;
-  flex: 1;
   flex-direction: column;
+  flex: 1;
   min-width: 60px;
   background-color: transparent;
   height: 39px;

@@ -101,3 +101,55 @@
   from { -ms-transform: translateX(0); }
   to { -ms-transform: translateX(100%); }
 }
+
+@if user.agent ie10 {
+	.in, .out {
+	  animation-timing-function: ease-in-out;
+	  animation-duration: 300ms;
+	  animation-fill-mode: both;
+	}
+	
+	.in {
+	  z-index:10;
+	}
+	
+	.out{
+	  z-index: 0 !important;
+	}
+	
+	.in {
+	  animation-name: slideinfromright;
+	}
+	
+	.out {
+	  animation-name: slideouttoleft;
+	}
+	
+	.in.reverse {
+	  animation-name: slideinfromleft;
+	}
+	
+	.out.reverse {
+	  animation-name: slideouttoright;
+	}
+	
+	@keyframes slideinfromright {
+	  from { transform: translateX(100%); }
+	  to { transform: translateX(0); }
+	}
+	
+	@keyframes slideinfromleft {
+	  from { transform: translateX(-100%); }
+	  to { transform: translateX(0); }
+	}
+	
+	@keyframes slideouttoleft {
+	  from { transform: translateX(0); }
+	  to { transform: translateX(-100%); }
+	}
+	
+	@keyframes slideouttoright {
+	  from { transform: translateX(0); }
+	  to { transform: translateX(100%); }
+	}
+}

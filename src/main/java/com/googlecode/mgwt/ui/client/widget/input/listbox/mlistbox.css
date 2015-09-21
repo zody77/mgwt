@@ -16,6 +16,17 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-ListBox {
+    display: -ms-flexbox;
+    -ms-user-select: text;
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+}
+
 @if user.agent gecko1_8 {
   .mgwt-ListBox {
     display: -moz-box;

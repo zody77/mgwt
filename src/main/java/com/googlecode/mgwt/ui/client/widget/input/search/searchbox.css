@@ -13,6 +13,10 @@
 	-ms-appearance: none;
 }
 
+@if user.agent safari {
+	::-webkit-search-cancel-button { -webkit-appearance: none; }
+}
+
 .mgwt-SearchBox {
   height: 44px;
   position: relative;
@@ -42,6 +46,12 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-SearchBox-input {
+    width: literal("calc(100% - 47px)");
+  }
+}
+
 @if user.agent gecko1_8 {
   .mgwt-SearchBox-input {
     width: literal("-moz-calc(100% - 47px);");
@@ -57,6 +67,12 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-SearchBox-input {
+    -ms-user-select: text;
+  }
+}
+
 @if user.agent gecko1_8 {
   .mgwt-SearchBox-input {
     top: 5px;
@@ -69,7 +85,7 @@
   }
 }
 
-@if user.agent ie9 ie10 {
+@if user.agent ie9 {
   .mgwt-SearchBox-input {
     top: 5px;
   }
@@ -109,6 +125,13 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-SearchBox-icon {
+    background-image: searchImage;
+    background-repeat: no-repeat;
+  }
+}
+
 .mgwt-SearchBox-icon {
     position: relative;
     top: 7px;
@@ -134,6 +157,19 @@
 }
 
 @if user.agent safari {
+
+	@if mgwt.density high {
+	  .mgwt-SearchBox-icon {
+	    -webkit-mask-size: 17px 17px;
+	  }
+	}
+	
+	@if mgwt.density xhigh {
+	  .mgwt-SearchBox-icon {
+	    -webkit-mask-size: 12px 12px;
+	  }
+	}
+	
   .mgwt-SearchBox-clear {
     -webkit-mask-image: clearImage;
     -webkit-mask-position: center center;
@@ -147,6 +183,27 @@
     background-repeat: no-repeat;
     background-position: center center;
   }
+}
+
+@if user.agent ie10 {
+
+	@if mgwt.density high {
+	  .mgwt-SearchBox-icon {
+	    background-size: 17px 17px;
+	  }
+	}
+	
+	@if mgwt.density xhigh {
+	  .mgwt-SearchBox-icon {
+	    background-size: 12px 12px;
+	  }
+	}
+	
+  .mgwt-SearchBox-clear {
+    background-image: clearImage;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }	
 }
 
 .mgwt-SearchBox-clear {
@@ -172,4 +229,34 @@
     -moz-mask-size: 14px 14px;
     -ms-mask-size: 14px 14px;
   }
+}
+
+@if user.agent safari {
+
+	@if mgwt.density high {
+	  .mgwt-SearchBox-clear {
+	    -webkit-mask-size: 19px 19px;
+	  }
+	}
+	
+	@if mgwt.density xhigh {
+	  .mgwt-SearchBox-clear {
+	    -webkit-mask-size: 14px 14px;
+	  }
+	}
+}
+
+@if user.agent ie10 {
+
+	@if mgwt.density high {
+	  .mgwt-SearchBox-clear {
+	    background-size: 19px 19px;
+	  }
+	}
+	
+	@if mgwt.density xhigh {
+	  .mgwt-SearchBox-clear {
+	    background-size: 14px 14px;
+	  }
+	}
 }

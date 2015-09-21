@@ -97,3 +97,51 @@
   from { -ms-transform: translateY(-100%); }
   to { -ms-transform: translateY(0%); }
 }
+
+@if user.agent ie10 {
+	.in, .out {
+	  animation-timing-function: ease-in-out;
+	  animation-duration: 300ms;
+	  animation-fill-mode: both;
+	}
+	
+	.in {
+	  animation-name: slideupfrombottom;
+	  z-index: 10;
+	}
+	
+	.out {
+	  animation-name: slideupfrommiddle;
+	  z-index: 0;
+	}
+	
+	.out.reverse {
+	  z-index: 10;
+	  animation-name: slidedownfrommiddle;
+	}
+	
+	.in.reverse {
+	  z-index: 0;
+	  animation-name: slidedownfromtop;
+	}
+	
+	@keyframes slideupfrombottom {
+	  from { transform: translateY(100%); }
+	  to { transform: translateY(0); }
+	}
+	
+	@keyframes slidedownfrommiddle {
+	  from { transform: translateY(0); }
+	  to { transform: translateY(100%); }
+	}
+	
+	@keyframes slideupfrommiddle {
+	  from { transform: translateY(0); }
+	  to { transform: translateY(-100%); }
+	}
+	
+	@keyframes slidedownfromtop {
+	  from { transform: translateY(-100%); }
+	  to { transform: translateY(0%); }
+	}
+}

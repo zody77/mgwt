@@ -53,10 +53,6 @@ under * the License.
   <define-configuration-property name="mgwt.css.inject" is-multi-valued="false" />
   <set-configuration-property name="mgwt.css.inject" value="end" />
 
-<!--   <generate-with class="com.googlecode.mgwt.ui.generator.OsDetectionGenerator"> -->
-<!--     <when-type-assignable class="com.googlecode.mgwt.ui.client.OsDetection" /> -->
-<!--   </generate-with> -->
-
   <generate-with class="com.googlecode.mgwt.ui.generator.DeviceDensityGenerator">
     <when-type-assignable class="com.googlecode.mgwt.ui.client.DeviceDensity" />
   </generate-with>
@@ -65,14 +61,21 @@ under * the License.
     <when-type-assignable class="com.googlecode.mgwt.ui.client.FormFactor" />
   </generate-with>
 
-  <replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl.TouchWidgetRuntimeImpl">
+  <replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetStandardImpl">
     <when-type-is class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl" />
   </replace-with>
 
-  <replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl.TouchWidgetMobileImpl">
+  <replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetTouchImpl">
     <when-type-is class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl" />
     <all>
       <when-property-is name="mgwt.user.agent" value="mobile" />
+    </all>
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetPointerImpl">
+    <when-type-is class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl" />
+    <all>
+      <when-property-is name="user.agent" value="ie10" />
     </all>
   </replace-with>
 	
@@ -103,8 +106,32 @@ under * the License.
     <when-type-is class="com.googlecode.mgwt.ui.client.util.impl.CssUtilImpl" />
     <any> 
       <when-property-is name="user.agent" value="ie9" />
+    </any>
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.util.impl.CssUtilIE10Impl">
+    <when-type-is class="com.googlecode.mgwt.ui.client.util.impl.CssUtilImpl" />
+    <any> 
       <when-property-is name="user.agent" value="ie10" />
     </any>
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.TouchSupport.TouchSupportStandard">
+    <when-type-is class="com.googlecode.mgwt.ui.client.TouchSupport" />
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.TouchSupport.TouchSupportNative">
+    <when-type-is class="com.googlecode.mgwt.ui.client.TouchSupport" />
+    <all>
+      <when-property-is name="mgwt.user.agent" value="mobile"/>
+    </all>
+  </replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.TouchSupport.TouchSupportEmulatedPointer">
+    <when-type-is class="com.googlecode.mgwt.ui.client.TouchSupport" />
+    <all> 
+      <when-property-is name="user.agent" value="ie10" />
+    </all>
   </replace-with>
 
   <!-- ButtonBar Buttons -->
@@ -160,7 +187,19 @@ under * the License.
         <when-property-is name="mgwt.formfactor" value="phone" />
         <when-property-is name="mgwt.formfactor" value="tablet" />
       </any>
+      <none>
+        <when-property-is name="user.agent" value="ie10" />
+      </none>
   </replace-with>
+
+  <!-- but IE10 on wp8/desktop supports resize, IE11 on wp8.1 supports orientation events via the Screen object -->
+  <replace-with class="com.googlecode.mgwt.ui.client.util.impl.IEOrientationHandler">
+    <when-type-is class="com.googlecode.mgwt.ui.client.util.OrientationHandler" />
+      <all>
+        <when-property-is name="user.agent" value="ie10" />
+      </all>
+  </replace-with>
+
 
   <!-- rebind IconHandler implementation -->
   <replace-with class="com.googlecode.mgwt.ui.client.util.IconHandler.IconHandlerEmulatedImpl">

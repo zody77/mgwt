@@ -13,6 +13,8 @@
  */
 package com.googlecode.mgwt.ui.client.widget.list.celllist;
 
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.EventTarget;
@@ -29,13 +31,11 @@ import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
-
 import com.googlecode.mgwt.dom.client.event.tap.Tap;
 import com.googlecode.mgwt.dom.client.event.touch.TouchHandler;
 import com.googlecode.mgwt.dom.client.recognizer.EventPropagator;
+import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl;
-
-import java.util.List;
 
 /**
  *
@@ -123,7 +123,12 @@ public class CellList<T> extends Widget implements HasCellSelectedHandler {
         return;
       }
 
-      event.preventDefault();
+      // if windows phone then do not prevent default, causes scrolling issues when
+      // in scroll panel (not sure why), ie10 desktop is fine
+      if (!MGWT.getOsDetection().isWindowsPhone())
+      {
+        event.preventDefault();
+      }
 
       // text node use the parent..
       if (Node.is(eventTarget) && !Element.is(eventTarget)) {

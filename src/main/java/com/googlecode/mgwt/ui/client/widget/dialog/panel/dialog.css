@@ -33,12 +33,31 @@
   text-align: center;
 }
 
+@if user.agent ie10 {
+	.mgwt-DialogPanel-footer {
+		display: -ms-flexbox;
+		-ms-flex-pack: center;
+	}
+}
+
+@if user.agent safari {
+	.mgwt-DialogPanel-footer {
+		display: -webkit-box; /* iOS < 7 && Android < 4.4*/
+	    display: -webkit-flex;
+	    -webkit-box-pack: center; /* iOS < 7 && Android < 4.4*/
+	    -webkit-justify-content: center;
+	}
+}
+
+@if user.agent gecko1_8 {
+	.mgwt-DialogPanel-footer {
+ 	 	display: -moz-box;
+        -moz-justify-content: center;
+	}
+}
+
 .mgwt-DialogPanel-footer {
   margin-top: 10px;
-  display: -webkit-box; /* iOS < 7 && Android < 4.4*/
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
   -webkit-box-pack: center; /* iOS < 7 && Android < 4.4*/
   -webkit-justify-content: center;
@@ -48,3 +67,4 @@
   -ms-justify-content: center;
   justify-content: center;
 }
+

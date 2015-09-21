@@ -38,7 +38,10 @@
 
       // Detect form factor from user agent.
       var ua = navigator.userAgent.toLowerCase();
-      if (ua.indexOf("iphone") != -1 || ua.indexOf("ipod") != -1) {
+      if (ua.indexOf("windows phone 8") != -1) {
+        // windows phone 8/8.1
+        return "phone";
+      } else if (ua.indexOf("iphone") != -1 || ua.indexOf("ipod") != -1) {
         // iphone and ipod.
         return "phone";
       } else if (ua.indexOf("ipad") != -1) {
@@ -57,6 +60,14 @@
     ]]></property-provider>
     <define-property name="mgwt.density" values="mid, high, xhigh" />
     <property-provider name="mgwt.density"><![CDATA[
+        if (!window.devicePixelRatio) {
+          try {
+            if ('deviceXDPI' in screen) {
+              window.devicePixelRatio = screen.deviceXDPI / screen.logicalXDPI;
+            }
+          }
+          catch(e) {}
+        }
         if (!window.devicePixelRatio) {
           return 'mid';
         }
@@ -78,4 +89,19 @@
     <replace-with class="com.googlecode.mgwt.dom.client.recognizer.EventPropagatorMobileImpl">
         <when-type-is class="com.googlecode.mgwt.dom.client.recognizer.EventPropagator"/>
     </replace-with>
+
+    <replace-with class="com.googlecode.mgwt.dom.client.recognizer.EventPropagatorStandardImpl">
+        <when-type-is class="com.googlecode.mgwt.dom.client.recognizer.EventPropagator"/>
+        <all>
+            <when-property-is name="user.agent" value="ie10" />
+        </all>
+    </replace-with>
+
+    <replace-with class="com.google.gwt.user.client.impl.DOMImplIE10">
+        <when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>
+        <all>
+            <when-property-is name="user.agent" value="ie10"/>
+        </all>
+    </replace-with>
+    
 </module>

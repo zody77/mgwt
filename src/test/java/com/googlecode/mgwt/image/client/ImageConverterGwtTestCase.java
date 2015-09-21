@@ -40,9 +40,29 @@ public class ImageConverterGwtTestCase extends GWTTestCase {
   @DoNotRunWith(Platform.HtmlUnitUnknown)
   public void testConvert_withKnownImage() {
     ImageConverter imageConverter = new ImageConverter();
-    ImageResource convertedResource = imageConverter.convert(
-        ImageConverterTestBundle.INSTANCE.knownImage(), "#0000F1");
+    ImageResource convertedResource = null;
+    
+    ImageConverterCallback callback = new ImageConverterCallback()
+    {
+      public ImageResource convertedResource = null;
+      
+      @Override
+      public void onFailure(Throwable caught)
+      {
+      }
 
+      @Override
+      public void onSuccess(ImageResource convertedResource)
+      {
+        this.convertedResource = convertedResource;
+      }
+      
+    };
+
+    imageConverter.convert(ImageConverterTestBundle.INSTANCE.knownImage(), "#0000F1", callback);
+    
+    delayTestFinish(200);
+    
     /*
      * Dirty hack to test, should be improved.
      */

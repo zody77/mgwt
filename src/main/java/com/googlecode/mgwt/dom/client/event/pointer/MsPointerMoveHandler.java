@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Daniel Kurka
+ * Copyright 2013 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,13 +13,19 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.googlecode.mgwt.ui.client.widget.input;
+package com.googlecode.mgwt.dom.client.event.pointer;
 
-import com.google.gwt.core.shared.GWT;
+import com.google.gwt.event.shared.EventHandler;
 
-public class InputApperanceHolder {
+/**
+ * Handler interface for {@link MsPointerMoveEvent} events.
+ */
+public interface MsPointerMoveHandler extends EventHandler {
 
-  public static final InputAppearance DEFAULT_APPERAERANCE = GWT.create(InputAppearance.class);
-
-  private InputApperanceHolder() {}
+  /**
+   * Called when MsPointerMoveEvent is fired.
+   *
+   * @param event the {@link MsPointerMoveEvent} that was fired
+   */
+  void onPointerMove(MsPointerMoveEvent event);
 }

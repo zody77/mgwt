@@ -33,7 +33,6 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.RootPanel;
-
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeEvent;
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeEvent.ORIENTATION;
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeHandler;
@@ -151,6 +150,25 @@ public class MGWT {
     }
 
     scrollingDisabled = settings.isPreventScrolling();
+
+    if (TouchSupport.isTouchEventsEmulatedUsingPointerEvents())
+    {
+      MetaElement ieCompatible = Document.get().createMetaElement();
+      ieCompatible.setHttpEquiv("x-ua-compatible");
+      ieCompatible.setContent("IE=10");
+      head.appendChild(ieCompatible);
+      
+      MetaElement tapHighlight = Document.get().createMetaElement();
+      tapHighlight.setName("msapplication-tap-highlight");
+      tapHighlight.setContent("no");
+      head.appendChild(tapHighlight);
+
+      if (settings.isPreventScrolling()) {
+        BodyElement body = Document.get().getBody();
+        setupPreventScrollingIE10(body);
+      }
+    }
+
     if (settings.isPreventScrolling() && getOsDetection().isIOs()) {
       BodyElement body = Document.get().getBody();
       setupPreventScrolling(body);
@@ -296,14 +314,20 @@ public class MGWT {
   }
 
   private static native void setupPreventScrolling(Element el)/*-{
-		var func = function(event) {
-			event.preventDefault();
-			return false;
-		};
-
-		el.ontouchmove = func;
-
+    var func = function(event) {
+      var tagName = event.target.tagName;
+      if ((tagName == 'INPUT') || (tagName == 'SELECT') || (tagName == 'TEXTAREA'))  {
+        return true;
+      }
+      event.preventDefault();
+      return false;
+    };
+    el.ontouchmove = func;
   }-*/;
+
+  private static void setupPreventScrollingIE10(Element el) {
+    el.setAttribute("style", "-ms-touch-action: none;");
+  }
 
   /**
    * A utility method to hide the soft keyboard

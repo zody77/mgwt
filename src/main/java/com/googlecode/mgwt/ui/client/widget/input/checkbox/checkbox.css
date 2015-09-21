@@ -12,7 +12,6 @@
 @def CONTAINER_MAX_OFF 41;
 @def CONTAINER_OFFSET_OFF -41;
 
-
 .mgwt-CheckBox {
   width: 81px;
   height: 27px;
@@ -41,6 +40,12 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-CheckBox-middle {
+    transition: all 0.1s ease-in-out;
+  }
+}
+
 @if user.agent gecko1_8 {
   .mgwt-CheckBox-middle {
     -moz-transition: all 0.1s ease-in-out;
@@ -62,6 +67,12 @@
 @if user.agent safari {
   .mgwt-CheckBox-middle-content {
     -webkit-box-sizing: border-box;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-CheckBox-middle-content {
+    box-sizing: border-box;
   }
 }
 
@@ -88,6 +99,12 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-CheckBox-on {
+    transition: all 0.1s ease-in-out;
+  }
+}
+
 @if user.agent gecko1_8 {
   .mgwt-CheckBox-on {
     -moz-transition: all 0.1s ease-in-out;
@@ -109,6 +126,12 @@
 @if user.agent safari {
   .mgwt-CheckBox-off {
     -webkit-transition: all 0.1s ease-in-out;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-CheckBox-off {
+    transition: all 0.1s ease-in-out;
   }
 }
 
@@ -143,6 +166,30 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-CheckBox-important .mgwt-CheckBox-on {
+    background-color: #fe9c12;
+  }
+  .mgwt-CheckBox-notchecked .mgwt-CheckBox-middle {
+    transform: translate3d(-41px,0,0);
+  }
+  .mgwt-CheckBox-checked .mgwt-CheckBox-middle {
+    transform: translate3d(0px,0,0);
+  }
+  .mgwt-CheckBox-notchecked .mgwt-CheckBox-off {
+    transform: translate3d(-41px,0,0);
+  }
+  .mgwt-CheckBox-checked .mgwt-CheckBox-off {
+    transform: translate3d(10px,0,0);
+  }
+  .mgwt-CheckBox-notchecked .mgwt-CheckBox-on {
+    transform: translate3d(-81px,0,0);
+  }
+  .mgwt-CheckBox-checked .mgwt-CheckBox-on {
+    transform: translate3d(0px,0,0);
+  }
+}
+
 @if user.agent gecko1_8 {
   .mgwt-CheckBox-important .mgwt-CheckBox-on {
     border: solid 1px #d87101;
@@ -172,4 +219,15 @@
     -moz-transform: translate(0px,0);
     -ms-transform: translate(0px,0);
   }
+}
+
+/*TODO add browser....*/
+@if user.agent ie8 ie9 {
+  .mgwt-CheckBox-important .mgwt-CheckBox-on {}
+  .mgwt-CheckBox-notchecked .mgwt-CheckBox-middle {}
+  .mgwt-CheckBox-checked .mgwt-CheckBox-middle {}
+  .mgwt-CheckBox-notchecked .mgwt-CheckBox-off {}
+  .mgwt-CheckBox-checked .mgwt-CheckBox-off {}
+  .mgwt-CheckBox-notchecked .mgwt-CheckBox-on {}
+  .mgwt-CheckBox-checked .mgwt-CheckBox-on {}
 }

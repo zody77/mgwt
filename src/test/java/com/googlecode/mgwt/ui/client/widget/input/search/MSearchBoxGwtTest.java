@@ -93,7 +93,7 @@ public class MSearchBoxGwtTest extends GWTTestCase {
         assertEquals(4, valueChangeEventCount);
         assertEquals(0, clearCount);
 
-        mSearchBox.clearButton.fireEvent(new TapEvent(this, null, 0, 0));
+        mSearchBox.clearButton.fireEvent(new TapEvent(this, null, null));
 
         assertEquals("", mSearchBox.getValue());
         assertEquals(2, submitCount);

@@ -3,6 +3,7 @@
   @external mgwt-DialogButton-cancel, mgwt-DialogButton-active;
 }
 .mgwt-DialogButton {
+  -webkit-box-flex: 1;
   -webkit-flex: 1;
   flex: 1;
   padding: 9px 13px;
@@ -20,6 +21,12 @@
 @if mgwt.formfactor desktop {
   .mgwt-DialogButton  {
     cursor: pointer;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-DialogButton  {
+    -ms-flex: 1 1;
   }
 }
 

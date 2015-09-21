@@ -1,4 +1,5 @@
 @external body, *;
+
 * {
   -webkit-text-size-adjust: none;
   -webkit-touch-callout: none;
@@ -14,6 +15,13 @@
   font-family: Helvetica, sans-serif;
 }
 
+@if user.agent safari {
+* {
+  -webkit-text-size-adjust: none;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: none;
+  -webkit-user-select: none;
+  }
 
 body {
   margin: 0;
@@ -35,9 +43,12 @@ body {
 :focus {
   outline-color: transparent;
   outline-style: none;
+  input , textarea{
+    -webkit-user-select: text;
+  }
 }
 
-@if user.agent gecko1_8 {
+@if user.agent ie10 {
   * {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -48,6 +59,18 @@ body {
     -webkit-user-select: text;
     -moz-user-select: text;
     -ms-user-select: text;
+     -ms-user-select: none;
+     -ms-text-size-adjust: none;
+     -ms-touch-select: none;
+     -ms-flex: 0 1 auto;
+  }
+  
+  input , textarea{
+    -ms-user-select: text;
+  }
+
+  a img {
+      border: none;
   }
 }
 
@@ -61,6 +84,33 @@ body {
     -moz-user-select: text;
     -ms-user-select: text;
   }
+}
+
+
+@if user.agent safari {
+body {
+  -webkit-perspective: 800;
+  -webkit-transform-style: preserve-3d;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #dfe2e2;
+  color: #000;
+  font-weight: 400;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  perspective: 800;
+  transform-style: preserve-3d;
+}
+
+
+:focus {
+  outline-color: transparent;
+  outline-style: none;
 }
 
 input:FOCUS,button:FOCUS {

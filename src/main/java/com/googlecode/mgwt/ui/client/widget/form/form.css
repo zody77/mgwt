@@ -27,13 +27,19 @@
   }
 }
 
+@if user.agent ie10 {
+  .mgwt-Form-Entry {
+    display: -ms-flexbox;
+    -ms-flex-pack: center;
+  }
+}
+
 @if user.agent gecko1_8 {
   .mgwt-Form-Entry {
     width: 100%;
     -moz-justify-content: center;
     -ms-justify-content: center;
     display: -moz-box;
-    display: -ms-flexbox; /* IE is in FF permutation */
   }
 }
 
@@ -55,6 +61,13 @@
 @if user.agent safari {
   .mgwt-Form-Entry-label {
     width: 30%;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-Form-Entry-label {
+    width: 30%;
+    display: -ms-flexbox;
   }
 }
 
@@ -80,6 +93,14 @@
     -webkit-box-flex: 1;
     -webkit-box-pack: end;
     display: -webkit-box;
+  }
+}
+
+@if user.agent ie10 {
+  .mgwt-Form-Entry-container {
+    -ms-flex: 1 1;
+    -ms-flex-pack: end;
+    display: -ms-flexbox;
   }
 }
 
