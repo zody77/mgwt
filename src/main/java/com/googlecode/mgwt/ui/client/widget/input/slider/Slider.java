@@ -38,185 +38,187 @@ import com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl;
 /**
  * The mgwt pointer widget.
  *
- * The pointer element is moved along the bar element to represent the value of the Slider
+ * The pointer element is moved along the bar element to represent the value of
+ * the Slider
  */
 public class Slider extends Widget implements HasValue<Integer>, LeafValueEditor<Integer> {
 
-  private class SliderTouchHandler implements TouchHandler {
+	private class SliderTouchHandler implements TouchHandler {
 
-    @Override
-    public void onTouchStart(TouchStartEvent event) {
-      setValueContrained(event.getTouches().get(0).getClientX());
-      if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
-        DOM.setCapture(getElement());
-      }
-      event.stopPropagation();
-      event.preventDefault();
-    }
+		@Override
+		public void onTouchStart(TouchStartEvent event) {
+			setValueContrained(event.getTouches().get(0).getClientX());
+			if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
+				DOM.setCapture(getElement());
+			}
+			event.stopPropagation();
+			event.preventDefault();
+		}
 
-    @Override
-    public void onTouchMove(TouchMoveEvent event) {
+		@Override
+		public void onTouchMove(TouchMoveEvent event) {
 
-      setValueContrained(event.getTouches().get(0).getClientX());
-      event.stopPropagation();
-      event.preventDefault();
-    }
+			setValueContrained(event.getTouches().get(0).getClientX());
+			event.stopPropagation();
+			event.preventDefault();
+		}
 
-    @Override
-    public void onTouchEnd(TouchEndEvent event) {
-      if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
-        DOM.releaseCapture(getElement());
-      }
-      event.stopPropagation();
-      event.preventDefault();
-    }
+		@Override
+		public void onTouchEnd(TouchEndEvent event) {
+			if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
+				DOM.releaseCapture(getElement());
+			}
+			event.stopPropagation();
+			event.preventDefault();
+		}
 
-    @Override
-    public void onTouchCancel(TouchCancelEvent event) {
-      if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
-        DOM.releaseCapture(getElement());
-      }
-    }
-  }
+		@Override
+		public void onTouchCancel(TouchCancelEvent event) {
+			if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
+				DOM.releaseCapture(getElement());
+			}
+		}
+	}
 
-  private static final SliderAppearance DEFAULT_APPEARANCE = GWT.create(SliderAppearance.class);
+	private static final SliderAppearance DEFAULT_APPEARANCE = GWT.create(SliderAppearance.class);
 
-  private static final TouchWidgetImpl TOUCH_WIDGET_IMPL = GWT.create(TouchWidgetImpl.class);
+	private static final TouchWidgetImpl TOUCH_WIDGET_IMPL = GWT.create(TouchWidgetImpl.class);
 
-  private int value;
-  private int max;
-  private final SliderAppearance apperance;
+	private int value;
+	private int max;
+	private final SliderAppearance apperance;
 
-  @UiField
-  public Element pointer;
-  @UiField
-  public Element bar;
+	@UiField
+	public Element pointer;
+	@UiField
+	public Element bar;
 
-  public Slider() {
-    this(DEFAULT_APPEARANCE);
-  }
+	public Slider() {
+		this(DEFAULT_APPEARANCE);
+	}
 
-  public Slider(SliderAppearance apperance) {
-    this.apperance = apperance;
-    setElement(this.apperance.uiBinder().createAndBindUi(this));
-    TOUCH_WIDGET_IMPL.addTouchHandler(this, new SliderTouchHandler());
-    max = 100;
-    value = 0;
-  }
+	public Slider(SliderAppearance apperance) {
+		this.apperance = apperance;
+		setElement(this.apperance.uiBinder().createAndBindUi(this));
+		TOUCH_WIDGET_IMPL.addTouchHandler(this, new SliderTouchHandler());
+		max = 100;
+		value = 0;
+	}
 
-  @Override
-  public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Integer> handler) {
-    return addHandler(handler, ValueChangeEvent.getType());
-  }
+	@Override
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Integer> handler) {
+		return addHandler(handler, ValueChangeEvent.getType());
+	}
 
-  /**
-   * Set the maximum of the pointer
-   *
-   * @param max the maximum to use
-   */
-  public void setMax(int max) {
-    if (max <= 0) {
-      throw new IllegalArgumentException("max > 0");
-    }
-    this.max = max;
-  }
+	/**
+	 * Set the maximum of the pointer
+	 *
+	 * @param max
+	 *            the maximum to use
+	 */
+	public void setMax(int max) {
+		if (max <= 0) {
+			throw new IllegalArgumentException("max > 0");
+		}
+		this.max = max;
+	}
 
-  /**
-   * get the maximum of the pointer
-   *
-   * @return the maximum of the pointer
-   */
-  public int getMax() {
-    return max;
-  }
+	/**
+	 * get the maximum of the pointer
+	 *
+	 * @return the maximum of the pointer
+	 */
+	public int getMax() {
+		return max;
+	}
 
-  @Override
-  public Integer getValue() {
-    return value;
-  }
+	@Override
+	public Integer getValue() {
+		return value;
+	}
 
-  @Override
-  public void setValue(Integer value) {
-    setValue(value, true);
-  }
+	@Override
+	public void setValue(Integer value) {
+		setValue(value, true);
+	}
 
-  @Override
-  protected void onAttach() {
-    super.onAttach();
-    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-      @Override
-      public void execute() {
-        setSliderPos(value);
-      }
-    });
-  }
+	@Override
+	protected void onAttach() {
+		super.onAttach();
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+			@Override
+			public void execute() {
+				setSliderPos(value);
+			}
+		});
+	}
 
-  @Override
-  public void setValue(Integer value, boolean fireEvents) {
-    setValue(value, fireEvents, true);
-  }
+	@Override
+	public void setValue(Integer value, boolean fireEvents) {
+		setValue(value, fireEvents, true);
+	}
 
-  @UiFactory
-  public SliderAppearance getApperance() {
-	  return apperance;
-  }
+	@UiFactory
+	public SliderAppearance getApperance() {
+		return apperance;
+	}
 
-  protected void setValue(Integer value, boolean fireEvents, boolean updateSlider) {
-    if (value == null) {
-      throw new IllegalArgumentException("value can not be null");
-    }
+	protected void setValue(Integer value, boolean fireEvents, boolean updateSlider) {
+		if (value == null) {
+			throw new IllegalArgumentException("value can not be null");
+		}
 
-    if (value < 0) {
-      throw new IllegalArgumentException("value >= 0");
-    }
+		if (value < 0) {
+			throw new IllegalArgumentException("value >= 0");
+		}
 
-    if (value >= max) {
-      throw new IllegalArgumentException("value >= max");
-    }
+		if (value >= max) {
+			throw new IllegalArgumentException("value >= max");
+		}
 
-    int oldValue = this.value;
-    this.value = value;
-    if (updateSlider) {
-      setSliderPos(value);
-    }
+		int oldValue = this.value;
+		this.value = value;
+		if (updateSlider) {
+			setSliderPos(value);
+		}
 
-    if (fireEvents) {
-      ValueChangeEvent.fireIfNotEqual(this, oldValue, value);
-    }
-  }
+		if (fireEvents) {
+			ValueChangeEvent.fireIfNotEqual(this, oldValue, value);
+		}
+	}
 
-  private void setSliderPos(int value) {
+	private void setSliderPos(int value) {
 
-    if (!isAttached()) {
-      return;
-    }
+		if (!isAttached()) {
+			return;
+		}
 
-    int width = bar.getOffsetWidth();
-    int sliderPos = value * width / max;
-    setPos(sliderPos);
+		int width = bar.getOffsetWidth();
+		int sliderPos = value * width / max;
+		setPos(sliderPos);
 
-  }
+	}
 
-  private void setValueContrained(int x) {
-    x = x - Slider.this.getAbsoluteLeft();
-    int width = bar.getOffsetWidth();
+	private void setValueContrained(int x) {
+		x = x - Slider.this.getAbsoluteLeft();
+		int width = bar.getOffsetWidth();
 
-    if (x < 0) {
-      x = 0;
-    }
+		if (x < 0) {
+			x = 0;
+		}
 
-    if (x > (width - 1)) {
-      x = width - 1;
-    }
+		if (x > (width - 1)) {
+			x = width - 1;
+		}
 
-    // scale it to max
-    int componentValue = x * max / width;
-    setValue(componentValue, true, false);
+		// scale it to max
+		int componentValue = x * max / width;
+		setValue(componentValue, true, false);
 
-    setPos(x);
-  }
+		setPos(x);
+	}
 
-  private void setPos(int x) {
-    CssUtil.translate(pointer, x, 0);
-  }
+	private void setPos(int x) {
+		CssUtil.translate(pointer, x, 0);
+	}
 }

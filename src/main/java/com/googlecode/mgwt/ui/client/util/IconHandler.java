@@ -25,97 +25,92 @@ import com.googlecode.mgwt.ui.client.MGWT;
 
 public class IconHandler {
 
-  static {
-    if (MGWT.getOsDetection().isAndroid4_3_orLower()) {
-      ICON_HANDLER = new IconHandlerEmulatedImpl();
-    } else {
-      ICON_HANDLER = GWT.create(IconHandlerImpl.class);
-    }
-  }
+	static {
+		if (MGWT.getOsDetection().isIEEdge() || MGWT.getOsDetection().isAndroid4_3_orLower()) {
+			ICON_HANDLER = new IconHandlerEmulatedImpl();
+		} else {
+			ICON_HANDLER = GWT.create(IconHandlerImpl.class);
+		}
+	}
 
+	private interface IconHandlerImpl {
+		public void setIcons(Element element, ImageResource icon, String color);
+	}
 
-  private interface IconHandlerImpl {
-    public void setIcons(Element element, ImageResource icon, String color);
-  }
+	private static class IconHandlerNativeImpl implements IconHandlerImpl {
 
-  private static class IconHandlerNativeImpl implements IconHandlerImpl {
+		protected static class Dimension {
+			private int width;
+			private int height;
 
-    protected static class Dimension {
-      private int width;
-      private int height;
+			public Dimension(int width, int height) {
+				this.width = width;
+				this.height = height;
+			}
+		}
 
-      public Dimension(int width, int height) {
-        this.width = width;
-        this.height = height;
-      }
-    }
+		@Override
+		public void setIcons(Element element, ImageResource icon, String color) {
+			if (icon == null) {
+				return;
+			}
 
-    @Override
-    public void setIcons(Element element, ImageResource icon, String color) {
-      if (icon == null) {
-        return;
-      }
+			Dimension dimensions = calculateDimensions(icon);
+			element.getStyle().setProperty("WebkitMaskBoxImage", "url(" + icon.getSafeUri().asString() + ")");
+			element.getStyle().setWidth(dimensions.width, Unit.PX);
+			element.getStyle().setHeight(dimensions.height, Unit.PX);
+			element.getStyle().setProperty("WebkitMaskSize", dimensions.width + "px, " + dimensions.height + "px");
+			element.getStyle().setBackgroundColor(color);
+		}
 
-      Dimension dimensions = calculateDimensions(icon);
-      element.getStyle().setProperty("WebkitMaskBoxImage",
-          "url(" + icon.getSafeUri().asString() + ")");
-      element.getStyle().setWidth(dimensions.width, Unit.PX);
-      element.getStyle().setHeight(dimensions.height, Unit.PX);
-      element.getStyle().setProperty("WebkitMaskSize",
-          dimensions.width + "px, " + dimensions.height + "px");
-      element.getStyle().setBackgroundColor(color);
-    }
+		protected Dimension calculateDimensions(ImageResource icon) {
+			int iconWidth = icon.getWidth();
+			int iconHeight = icon.getHeight();
 
-    protected Dimension calculateDimensions(ImageResource icon) {
-      int iconWidth = icon.getWidth();
-      int iconHeight = icon.getHeight();
+			if (MGWT.getDeviceDensity().isHighDPI()) {
+				iconWidth /= 1.5;
+				iconHeight /= 1.5;
+			} else if (MGWT.getDeviceDensity().isXHighDPI()) {
+				iconWidth /= 2;
+				iconHeight /= 2;
+			}
+			return new Dimension(iconWidth, iconHeight);
+		}
+	}
 
-      if (MGWT.getDeviceDensity().isHighDPI()) {
-        iconWidth /= 1.5;
-        iconHeight /= 1.5;
-      } else if (MGWT.getDeviceDensity().isXHighDPI()) {
-        iconWidth /= 2;
-        iconHeight /= 2;
-      }
-      return new Dimension(iconWidth, iconHeight);
-    }
-  }
+	private static class IconHandlerEmulatedImpl extends IconHandlerNativeImpl {
 
-  private static class IconHandlerEmulatedImpl extends IconHandlerNativeImpl {
+		private static final ImageConverter converter = new ImageConverter();
 
-    private static final ImageConverter converter = new ImageConverter();
+		@Override
+		public void setIcons(final Element element, ImageResource icon, String color) {
+			if (icon == null) {
+				return;
+			}
 
-    @Override
-    public void setIcons(final Element element, ImageResource icon, String color) {
-      if (icon == null) {
-        return;
-      }
+			converter.convert(icon, color, new ImageConverterCallback() {
 
-      converter.convert(icon, color, new ImageConverterCallback() {
+				@Override
+				public void onFailure(Throwable caught) {
+				}
 
-        @Override
-        public void onFailure(Throwable caught) {
-        }
+				@Override
+				public void onSuccess(ImageResource convertImageResource) {
+					element.getStyle().setBackgroundColor("transparent");
+					Dimension dimensions = calculateDimensions(convertImageResource);
+					element.getStyle().setWidth(dimensions.width, Unit.PX);
+					element.getStyle().setHeight(dimensions.height, Unit.PX);
+					element.getStyle().setBackgroundImage("url(" + convertImageResource.getSafeUri().asString() + ")");
+					element.getStyle().setProperty("backgroundSize", dimensions.width + "px " + dimensions.height + "px");
+				}
 
-        @Override
-        public void onSuccess(ImageResource convertImageResource) {
-          element.getStyle().setBackgroundColor("transparent");
-          Dimension dimensions = calculateDimensions(convertImageResource);
-          element.getStyle().setWidth(dimensions.width, Unit.PX);
-          element.getStyle().setHeight(dimensions.height, Unit.PX);
-          element.getStyle().setBackgroundImage(
-              "url(" + convertImageResource.getSafeUri().asString() + ")");
-          element.getStyle().setProperty("backgroundSize",
-              dimensions.width + "px " + dimensions.height + "px");
-        }
-        
-      });
-    }
-  }
+			});
+		}
+	}
 
-  private static final IconHandlerImpl ICON_HANDLER;
+	private static final IconHandlerImpl ICON_HANDLER;
 
-  public static void setIcons(Element element, ImageResource icon, String color) {
-    ICON_HANDLER.setIcons(element, icon, color);
-  }
+	public static void setIcons(Element element, ImageResource icon, String color) {
+		ICON_HANDLER.setIcons(element, icon, color);
+	}
 }

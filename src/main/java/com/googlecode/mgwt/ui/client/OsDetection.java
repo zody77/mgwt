@@ -125,11 +125,12 @@ public interface OsDetection {
 	public boolean isPhone();
 
 	/**
-	 * Are we running on Windows Phone 8/8.1
+	 * Are we running on Windows Phone 8/8.1/10
+	 * 
 	 * @return
 	 */
 	public boolean isWindowsPhone();
-	
+
 	/**
 	 * Are we running on a blackberry device
 	 *
@@ -142,7 +143,9 @@ public interface OsDetection {
 
 	boolean isAndroid2x();
 
-  boolean isIOS6();
+	boolean isIOS6();
 
-  boolean isAndroid4_3_orLower();
+	boolean isAndroid4_3_orLower();
+
+	boolean isIEEdge();
 }

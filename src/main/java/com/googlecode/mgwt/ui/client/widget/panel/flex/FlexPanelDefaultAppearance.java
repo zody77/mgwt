@@ -20,31 +20,31 @@ import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Panel;
 
 public class FlexPanelDefaultAppearance implements FlexPanelAppearance {
-  static {
-    Resources.INSTANCE.css().ensureInjected();
-  }
+	static {
+		Resources.INSTANCE.css().ensureInjected();
+	}
 
-  interface Resources extends ClientBundle {
+	interface Resources extends ClientBundle {
 
-    Resources INSTANCE = GWT.create(Resources.class);
+		Resources INSTANCE = GWT.create(Resources.class);
 
-    @Source({"flex.css"})
-    FlexPanelCss css();
-  }
+		@Source({ "flex.css" })
+		FlexPanelCss css();
+	}
 
-  @UiTemplate("FlexPanelBaseAppearance.ui.xml")
-  interface Binder extends UiBinder<Panel, FlexPanel> {
-  }
+	@UiTemplate("FlexPanelBaseAppearance.ui.xml")
+	interface Binder extends UiBinder<Panel, FlexPanel> {
+	}
 
-  private static final Binder UI_BINDER = GWT.create(Binder.class);
+	private static final Binder UI_BINDER = GWT.create(Binder.class);
 
-  @Override
-  public UiBinder<Panel, FlexPanel> uiBinder() {
-    return UI_BINDER;
-  }
+	@Override
+	public UiBinder<Panel, FlexPanel> uiBinder() {
+		return UI_BINDER;
+	}
 
-  @Override
-  public FlexPanelCss css() {
-    return Resources.INSTANCE.css();
-  }
+	@Override
+	public FlexPanelCss css() {
+		return Resources.INSTANCE.css();
+	}
 }

@@ -114,8 +114,10 @@
   .mgwt-SearchBox-icon {
     -webkit-mask-image: searchImage;
     -webkit-mask-repeat: no-repeat;
-    background-color: #78787E;
-  }
+
+	background-image: searchImage;
+    background-repeat: no-repeat;
+    background-color: inherit;  }
 }
 
 @if user.agent gecko1_8 {
@@ -212,7 +214,7 @@
   right: 0px;
   height: 30px;
   width: 30px;
-  background-color: #78787E;
+  background-color: inherit;
 }
 
 @if mgwt.density high {
