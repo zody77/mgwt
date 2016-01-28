@@ -15,305 +15,306 @@ package com.googlecode.mgwt.ui.client.widget.image;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.resources.client.ImageResource;
-
 import com.googlecode.mgwt.ui.client.widget.image.ImageHolder.ImageHolderAppearance.Images;
 
 public class ImageHolder {
-  private static final ImageHolderAppearance APPEARANCE = GWT.create(ImageHolderAppearance.class);
+	private static final ImageHolderAppearance APPEARANCE = GWT.create(ImageHolderAppearance.class);
 
-  public interface ImageHolderAppearance {
-    public interface Images {
-      ImageResource about();
+	public interface ImageHolderAppearance {
+		public interface Images {
+			ImageResource about();
 
-      ImageResource accept();
+			ImageResource accept();
 
-      ImageResource accounts();
+			ImageResource accounts();
 
-      ImageResource addAlarm();
+			ImageResource addAlarm();
 
-      ImageResource addGroup();
+			ImageResource addGroup();
 
-      ImageResource addPerson();
+			ImageResource addPerson();
 
-      ImageResource addToQueue();
+			ImageResource addToQueue();
 
-      ImageResource airplaneModeOff();
+			ImageResource airplaneModeOff();
 
-      ImageResource airplaneModeOn();
+			ImageResource airplaneModeOn();
 
-      ImageResource alarms();
+			ImageResource alarms();
 
-      ImageResource attachment();
+			ImageResource attachment();
 
-      ImageResource back();
+			ImageResource back();
 
-      ImageResource backspace();
+			ImageResource backspace();
 
-      ImageResource bad();
+			ImageResource bad();
 
-      ImageResource battery();
+			ImageResource battery();
 
-      ImageResource bightnessLow();
+			ImageResource bightnessLow();
 
-      ImageResource bluetoothConnected();
+			ImageResource bluetoothConnected();
 
-      ImageResource bluetooth();
+			ImageResource bluetooth();
 
-      ImageResource bluetoothSearching();
+			ImageResource bluetoothSearching();
 
-      ImageResource brightnessAuto();
+			ImageResource brightnessAuto();
 
-      ImageResource brightnessHigh();
+			ImageResource brightnessHigh();
 
-      ImageResource brightnessMedium();
+			ImageResource brightnessMedium();
 
-      ImageResource call();
+			ImageResource call();
 
-      ImageResource camera();
+			ImageResource camera();
 
-      ImageResource cancel();
+			ImageResource cancel();
 
-      ImageResource cast();
+			ImageResource cast();
 
-      ImageResource ccBcc();
+			ImageResource ccBcc();
 
-      ImageResource chat();
+			ImageResource chat();
 
-      ImageResource cloud();
+			ImageResource cloud();
 
-      ImageResource collapse();
+			ImageResource collapse();
 
-      ImageResource collection();
+			ImageResource collection();
 
-      ImageResource computer();
+			ImageResource computer();
 
-      ImageResource copy();
+			ImageResource copy();
 
-      ImageResource crop();
+			ImageResource crop();
 
-      ImageResource cut();
+			ImageResource cut();
 
-      ImageResource dataUsage();
+			ImageResource dataUsage();
 
-      ImageResource dialPad();
+			ImageResource dialPad();
 
-      ImageResource directions();
+			ImageResource directions();
 
-      ImageResource discard();
+			ImageResource discard();
 
-      ImageResource dock();
+			ImageResource dock();
 
-      ImageResource download();
+			ImageResource download();
 
-      ImageResource edit();
+			ImageResource edit();
 
-      ImageResource email();
+			ImageResource email();
 
-      ImageResource endCall();
+			ImageResource endCall();
 
-      ImageResource error();
+			ImageResource error();
 
-      ImageResource event();
+			ImageResource event();
 
-      ImageResource expand();
+			ImageResource expand();
 
-      ImageResource fastForward();
+			ImageResource fastForward();
 
-      ImageResource favorite();
+			ImageResource favorite();
 
-      ImageResource flashAutomatic();
+			ImageResource flashAutomatic();
 
-      ImageResource flashOff();
+			ImageResource flashOff();
 
-      ImageResource flashOn();
+			ImageResource flashOn();
 
-      ImageResource forward();
+			ImageResource forward();
 
-      ImageResource fullScreen();
+			ImageResource fullScreen();
 
-      ImageResource gamepad();
+			ImageResource gamepad();
 
-      ImageResource goToToday();
+			ImageResource goToToday();
 
-      ImageResource good();
+			ImageResource good();
 
-      ImageResource group();
+			ImageResource group();
 
-      ImageResource halfImportant();
+			ImageResource halfImportant();
 
-      ImageResource headphones();
+			ImageResource headphones();
 
-      ImageResource headset();
+			ImageResource headset();
 
-      ImageResource help();
+			ImageResource help();
 
-      ImageResource importExport();
+			ImageResource importExport();
 
-      ImageResource important();
+			ImageResource important();
 
-      ImageResource keyboard();
+			ImageResource keyboard();
 
-      ImageResource labels();
+			ImageResource labels();
 
-      ImageResource locationFound();
+			ImageResource locationFound();
 
-      ImageResource locationOff();
+			ImageResource locationOff();
 
-      ImageResource locationSearching();
+			ImageResource locationSearching();
 
-      ImageResource makeAvailableOffline();
+			ImageResource makeAvailableOffline();
 
-      ImageResource map();
+			ImageResource map();
 
-      ImageResource merge();
+			ImageResource merge();
 
-      ImageResource mic();
+			ImageResource mic();
 
-      ImageResource micMuted();
+			ImageResource micMuted();
 
-      ImageResource mouse();
+			ImageResource mouse();
 
-      ImageResource networkCell();
+			ImageResource networkCell();
 
-      ImageResource networkWifi();
+			ImageResource networkWifi();
 
-      ImageResource newAccount();
+			ImageResource newAccount();
 
-      ImageResource newAttachment();
+			ImageResource newAttachment();
 
-      ImageResource newEmail();
+			ImageResource newEmail();
 
-      ImageResource newEvent();
+			ImageResource newEvent();
 
-      ImageResource newItem();
+			ImageResource newItem();
 
-      ImageResource newLabel();
+			ImageResource newLabel();
 
-      ImageResource newPicture();
+			ImageResource newPicture();
 
-      ImageResource next();
+			ImageResource next();
 
-      ImageResource nextItem();
+			ImageResource nextItem();
 
-      ImageResource notImportant();
+			ImageResource notImportant();
 
-      ImageResource notSecure();
+			ImageResource notSecure();
 
-      ImageResource overflow();
+			ImageResource overflow();
 
-      ImageResource paste();
+			ImageResource paste();
 
-      ImageResource pause();
+			ImageResource pause();
 
-      ImageResource pauseOverVideo();
+			ImageResource pauseOverVideo();
 
-      ImageResource person();
+			ImageResource person();
 
-      ImageResource phone();
+			ImageResource phone();
 
-      ImageResource picture();
+			ImageResource picture();
 
-      ImageResource place();
+			ImageResource place();
 
-      ImageResource play();
+			ImageResource play();
 
-      ImageResource playOverVideo();
+			ImageResource playOverVideo();
 
-      ImageResource previous();
+			ImageResource previous();
 
-      ImageResource previousItem();
+			ImageResource previousItem();
 
-      ImageResource read();
+			ImageResource print();
 
-      ImageResource refresh();
+			ImageResource read();
 
-      ImageResource remove();
+			ImageResource refresh();
 
-      ImageResource repeat();
+			ImageResource remove();
 
-      ImageResource replay();
+			ImageResource repeat();
 
-      ImageResource replyAll();
+			ImageResource replay();
 
-      ImageResource reply();
+			ImageResource replyAll();
 
-      ImageResource returnFromFullScreen();
+			ImageResource reply();
 
-      ImageResource rewind();
+			ImageResource returnFromFullScreen();
 
-      ImageResource ringVolume();
+			ImageResource rewind();
 
-      ImageResource rotateLeft();
+			ImageResource ringVolume();
 
-      ImageResource rotateRight();
+			ImageResource rotateLeft();
 
-      ImageResource save();
+			ImageResource rotateRight();
 
-      ImageResource screenLockedToLandscape();
+			ImageResource save();
 
-      ImageResource screenLockedToPortrait();
+			ImageResource screenLockedToLandscape();
 
-      ImageResource screenRotation();
+			ImageResource screenLockedToPortrait();
 
-      ImageResource sdStorage();
+			ImageResource screenRotation();
 
-      ImageResource search();
+			ImageResource sdStorage();
 
-      ImageResource secure();
+			ImageResource search();
 
-      ImageResource selectAll();
+			ImageResource secure();
 
-      ImageResource sendNow();
+			ImageResource selectAll();
 
-      ImageResource settings();
+			ImageResource sendNow();
 
-      ImageResource share();
+			ImageResource settings();
 
-      ImageResource shuffle();
+			ImageResource share();
 
-      ImageResource slideshow();
+			ImageResource shuffle();
 
-      ImageResource sortBySize();
+			ImageResource slideshow();
 
-      ImageResource split();
+			ImageResource sortBySize();
 
-      ImageResource stop();
+			ImageResource split();
 
-      ImageResource storage();
+			ImageResource stop();
 
-      ImageResource switchCamera();
+			ImageResource storage();
 
-      ImageResource switchVideo();
+			ImageResource switchCamera();
 
-      ImageResource time();
+			ImageResource switchVideo();
 
-      ImageResource undo();
+			ImageResource time();
 
-      ImageResource unread();
+			ImageResource undo();
 
-      ImageResource upload();
+			ImageResource unread();
 
-      ImageResource usb();
+			ImageResource upload();
 
-      ImageResource video();
+			ImageResource usb();
 
-      ImageResource viewAsGrid();
+			ImageResource video();
 
-      ImageResource viewAsList();
+			ImageResource viewAsGrid();
 
-      ImageResource volumeMuted();
+			ImageResource viewAsList();
 
-      ImageResource volumeOn();
+			ImageResource volumeMuted();
 
-      ImageResource warning();
+			ImageResource volumeOn();
 
-      ImageResource webSite();
-    }
+			ImageResource warning();
 
-    Images get();
-  }
+			ImageResource webSite();
+		}
 
-  public static Images get() {
-    return APPEARANCE.get();
-  }
+		Images get();
+	}
+
+	public static Images get() {
+		return APPEARANCE.get();
+	}
 }
