@@ -156,7 +156,7 @@ public class OsDetectionRuntimeImpl implements OsDetection {
 	}
 
 	private boolean isIEEdge(String userAgent) {
-		if (userAgent.contains("edge/12")) {
+		if (userAgent.contains("edge")) {
 			return true;
 		}
 		return false;

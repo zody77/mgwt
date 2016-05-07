@@ -24,7 +24,6 @@ import com.googlecode.mgwt.ui.client.widget.animation.Animation;
 import com.googlecode.mgwt.ui.client.widget.animation.AnimationEndCallback;
 import com.googlecode.mgwt.ui.client.widget.animation.AnimationWidget;
 
-
 /**
  * A simple helper class to make the direct use of {@link AnimatableDisplay}
  * easier.
@@ -53,7 +52,8 @@ public class AnimationHelper extends Composite {
 	/**
 	 * Construct an animation helper with a given display
 	 * 
-	 * @param display the display to use
+	 * @param display
+	 *            the display to use
 	 */
 	public AnimationHelper(AnimatableDisplay display) {
 		this.display = display;
@@ -62,33 +62,43 @@ public class AnimationHelper extends Composite {
 		initWidget(display.asWidget());
 	}
 
-  /**
-   * animate to a given widget. If this is called while an animation is running this is a noop.
-   * 
-   * @param w the widget to animate to
-   * @param animation the animation to use
-   */
+	/**
+	 * animate to a given widget. If this is called while an animation is
+	 * running this is a noop.
+	 * 
+	 * @param w
+	 *            the widget to animate to
+	 * @param animation
+	 *            the animation to use
+	 */
 	public void goTo(IsWidget w, Animation animation) {
 		goTo(w, animation, null);
 	}
 
-  /**
-   * animate to a given widget. If this is called while an animation is running this is a noop.
-   * 
-   * @param w the widget to animate to
-   * @param animation the animation to use
-   * @param callback a callback that will be called once the animation is finished
-   */
+	/**
+	 * animate to a given widget. If this is called while an animation is
+	 * running this is a noop.
+	 * 
+	 * @param w
+	 *            the widget to animate to
+	 * @param animation
+	 *            the animation to use
+	 * @param callback
+	 *            a callback that will be called once the animation is finished
+	 */
 	public void goTo(IsWidget w, Animation animation, AnimationEndCallback callback) {
 		goTo(w.asWidget(), animation, callback);
 	}
 
-  /**
-   * animate to a given widget. If this is called while an animation is running this is a noop.
-   * 
-   * @param w the widget to animate to
-   * @param animation the animation to use
-   */
+	/**
+	 * animate to a given widget. If this is called while an animation is
+	 * running this is a noop.
+	 * 
+	 * @param w
+	 *            the widget to animate to
+	 * @param animation
+	 *            the animation to use
+	 */
 	public void goTo(Widget w, Animation animation) {
 		goTo(w, animation, null);
 	}
@@ -97,10 +107,12 @@ public class AnimationHelper extends Composite {
 	 * animate to a given widget. If this is called while an animation is
 	 * running this is a noop.
 	 * 
-	 * @param w the widget to animate to
-	 * @param animation the animation to use
-	 * @param callback a callback that will be called once the animation is
-	 *            finished
+	 * @param w
+	 *            the widget to animate to
+	 * @param animation
+	 *            the animation to use
+	 * @param callback
+	 *            a callback that will be called once the animation is finished
 	 */
 	public void goTo(Widget w, Animation animation, final AnimationEndCallback callback) {
 		if (isAnimating) {
@@ -119,13 +131,12 @@ public class AnimationHelper extends Composite {
 			@Override
 			public void onAnimationEnd() {
 				isAnimating = false;
-				if (callback != null)
+				if (callback != null) {
 					callback.onAnimationEnd();
+				}
 			}
 		});
-
 		isFirst = !isFirst;
-
 	}
 
 	/**
